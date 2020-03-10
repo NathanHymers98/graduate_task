@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Products</h1>
+    <a href="{{ path('app_register') }}">Register</a>
+    <form action="home.html.twig" >
+        <input type="file">
+        <button type="submit">Upload</button>
+</form>
+{% endblock %}

@@ -52,7 +52,7 @@ class Product
     private $taxRate;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isDiscontinued;
 
@@ -150,7 +150,7 @@ class Product
         return $this->isDiscontinued;
     }
 
-    public function setIsDiscontinued(bool $isDiscontinued): self
+    public function setIsDiscontinued(bool $isDiscontinued): ?self
     {
         $this->isDiscontinued = $isDiscontinued;
 

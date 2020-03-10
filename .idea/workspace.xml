@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c35f3046-c304-4704-846e-c77211a6f1c6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/home.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,8 +141,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
+    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -153,7 +161,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1583843292985</updated>
-      <workItem from="1583843294530" duration="4604000" />
+      <workItem from="1583843294530" duration="7778000" />
     </task>
     <servers />
   </component>
@@ -161,14 +169,18 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583846839845">
+    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583852423300">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583846839845" />
-    <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1583843816954">
+    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583852423300" />
+    <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1583852688968">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1120" y="617" key="NewPhpClassDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583843816954" />
+    <state x="1120" y="617" key="NewPhpClassDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583852688968" />
+    <state x="941" y="449" key="SettingsEditor" timestamp="1583851899575">
+      <screen x="0" y="0" width="2880" height="1620" />
+    </state>
+    <state x="941" y="449" key="SettingsEditor/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583851899575" />
     <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup" timestamp="1583846999714">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>

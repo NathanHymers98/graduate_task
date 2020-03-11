@@ -1,11 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
 {% block body %}
 <h1>Products</h1>
-    <a href="{{ path('app_register') }}">Register</a>
-    <a href="{{ path('app_login') }}">Login</a>
-    <form action="home.html.twig" >
-        <input type="file">
-        <button type="submit">Upload</button>
-</form>
 {% endblock %}

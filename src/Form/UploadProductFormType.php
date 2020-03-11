@@ -13,8 +13,8 @@ class UploadProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('UploadFile', FileType::class, [
-                'maxSize' => '5M'
+            ->add('uploadFile', FileType::class, [
+                'mapped' => false
             ])
         ;
     }

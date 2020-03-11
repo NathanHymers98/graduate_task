@@ -2,18 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c35f3046-c304-4704-846e-c77211a6f1c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UploadProductFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UploadProductFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/UploadProductHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UploadProductFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/home.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -161,7 +167,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1583843292985</updated>
-      <workItem from="1583843294530" duration="7778000" />
+      <workItem from="1583843294530" duration="8829000" />
+      <workItem from="1583915196130" duration="15041000" />
     </task>
     <servers />
   </component>
@@ -169,10 +176,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583852423300">
+    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583917874210">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583852423300" />
+    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583917874210" />
     <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1583852688968">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
@@ -181,9 +188,13 @@
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
     <state x="941" y="449" key="SettingsEditor/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583851899575" />
-    <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup" timestamp="1583846999714">
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog" timestamp="1583915202942">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583846999714" />
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583915202942" />
+    <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup" timestamp="1583922329901">
+      <screen x="0" y="0" width="2880" height="1620" />
+    </state>
+    <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583922329901" />
   </component>
 </project>

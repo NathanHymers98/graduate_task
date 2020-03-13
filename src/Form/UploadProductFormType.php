@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class UploadProductFormType extends AbstractType
 {
@@ -14,6 +15,12 @@ class UploadProductFormType extends AbstractType
     {
         $builder
             ->add('uploadFile', FileType::class, [
+//                'constraints' => [
+//                    new File([
+//                        'mimeTypes' => 'text/csv',
+//                        'mimeTypesMessage' => 'Please upload a valid CSV file'
+//                    ])
+//                ],
                 'mapped' => false
             ])
         ;

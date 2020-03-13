@@ -6,15 +6,15 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\UploadProductFormType;
+use App\Service\ObjectValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\CsvEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+
 use Symfony\Component\Serializer\SerializerInterface;
+
 
 
 class ProductController extends AbstractController
@@ -30,10 +30,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/upload", name="app_upload")
      */
-    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer)
+    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator)
     {
-        $product = new Product();
-        $form = $this->createForm(UploadProductFormType::class, $product);
+
+        $form = $this->createForm(UploadProductFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,7 +42,7 @@ class ProductController extends AbstractController
 
             $destination = $this->getParameter('kernel.project_dir').'/uploads';
             $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME); // gets filename with no extension
-            $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->getClientOriginalExtension();
             $directory = $destination.'/'.$newFilename;
 
             $uploadedFile->move(
@@ -50,12 +50,39 @@ class ProductController extends AbstractController
                 $newFilename
             );
 
-            dd($data =$serializer->decode(file_get_contents($directory), 'csv'));
+            $data = $serializer->decode(file_get_contents($directory), 'csv');
+
+            foreach ($data as $item) {
+                $product = (new Product())
+                    ->setProductCode($item['Product Code'] ?? null)
+                    ->setProductName($item['Product Name'] ?? null)
+                    ->setProductDescription($item['Product Description'] ?? null)
+                    ->setProductStock($item['Stock'] ?? null)
+                    ->setNetCost($item['Cost in GBP'] ?? null)
+                    ->setIsDiscontinued($item['Discontinued'] ?? null)
+                ;
+//            $uploadedProductCollection = [];
+//            foreach ($data as $key => $results) { // Adding each product entity to the collection
+//                $uploadedProductCollection[] = $product->createFormArray($results);
+//            }
+//
+//            foreach ($uploadedProductCollection as $item) { // Iterating over the collection the same amount of times as there are objects inside it.
+                //$validator = new ObjectValidator($product);
+                $validator->emptyEntry($product);
+                $validator->validateDiscontinued($product);
+                $successfulProducts = $validator->getSuccessfulImport();
+                foreach ($successfulProducts as $successItem ) {
+                    $entityManager->persist($successItem);
+                    $entityManager->flush();
+                }
+                $failedProducts = $validator->getFailedImport();
+                foreach ($failedProducts as $failedItem) {
+                    $entityManager->persist($failedItem);
+                    $entityManager->flush();
+                }
 
 
-
-            $entityManager->persist($product);
-            $entityManager->flush();
+            }
 
             $this->addFlash('success', 'File uploaded');
 

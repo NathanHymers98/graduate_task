@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -18,6 +19,7 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Unique(message="Product code must be unique")
      */
     private $productCode;
 
@@ -32,29 +34,42 @@ class Product
     private $productDescription;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,  nullable=true)
      */
     private $productManufacture;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $productStock;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $netCost;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
-    private $taxRate;
+    private $taxRate = 20;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string")
      */
     private $isDiscontinued;
+
+//    public function createFormArray(array $data)
+//    {
+//        $i = new self();
+//        $i->productCode = $data['Product Code'] ?? null;
+//        $i->productName = $data['Product Name'] ?? null;
+//        $i->productDescription = $data['Product Description'] ?? null;
+//        $i->productStock = $data['Stock'] ?? null;
+//        $i->netCost = $data['Cost in GBP'] ?? null;
+//        $i->isDiscontinued = $data['Discontinued'] ?? null;
+//
+//        return $i;
+//    }
 
     public function getId(): ?int
     {
@@ -109,48 +124,48 @@ class Product
         return $this;
     }
 
-    public function getProductStock(): ?int
+    public function getProductStock(): ?string
     {
         return $this->productStock;
     }
 
-    public function setProductStock(int $productStock): self
+    public function setProductStock(string $productStock): ?self
     {
         $this->productStock = $productStock;
 
         return $this;
     }
 
-    public function getNetCost(): ?int
+    public function getNetCost(): ?string
     {
         return $this->netCost;
     }
 
-    public function setNetCost(int $netCost): self
+    public function setNetCost(string $netCost): self
     {
         $this->netCost = $netCost;
 
         return $this;
     }
 
-    public function getTaxRate(): ?int
+    public function getTaxRate(): ?string
     {
         return $this->taxRate;
     }
 
-    public function setTaxRate(int $taxRate): self
+    public function setTaxRate(string $taxRate): self
     {
         $this->taxRate = $taxRate;
 
         return $this;
     }
 
-    public function getIsDiscontinued(): ?bool
+    public function getIsDiscontinued(): ?string
     {
         return $this->isDiscontinued;
     }
 
-    public function setIsDiscontinued(bool $isDiscontinued): ?self
+    public function setIsDiscontinued(string $isDiscontinued): ?self
     {
         $this->isDiscontinued = $isDiscontinued;
 

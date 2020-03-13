@@ -20,30 +20,41 @@ class ObjectValidator
 //
 //    }
 
-    public function validateDiscontinued(Product $item) // If an item is discontinued, attach the current date there instead
+    public function validateDiscontinued(Product $product) // If an item is discontinued, attach the current date there instead
     {
         $date = new \DateTime();
-        if ($item->getIsDiscontinued() == null) {
-            $item->setIsDiscontinued('no');
-            $this->successfulImport[] = $item;
-        } elseif ($item->getIsDiscontinued() == 'yes'){
-            $item->setIsDiscontinued('Yes, discontinued on: '.$date->format('Y-m-d'));
-            $this->successfulImport[] = $item;
+        if ($product->getIsDiscontinued() == null) {
+            $product->setIsDiscontinued('no');
+            $this->successfulImport[] = $product;
+        } elseif ($product->getIsDiscontinued() == 'yes') {
+            $product->setIsDiscontinued('Yes, discontinued on: '.$date->format('Y-m-d'));
+            $this->successfulImport[] = $product;
         }
-        return $this->successfulImport;
     }
 
-    public function emptyEntry(Product $item)
-    {
-        if(empty($item->getProductStock() || empty($item->getNetCost()))) {
-            $item->setProductStock(0) || $item->setNetCost(0);
-            $this->failedImport[] = $item;
-        }
-
-//        if ('' == $this->product->getNetCost() || '' == $this->product->getProductStock()) {
-//            $this->failedImport[] = $item;
+//    public function emptyEntry(Product $product)
+//    {
+//        if(empty($product->getProductStock() || empty($product->getNetCost()))) {
+//            $product->setProductStock(0) || $product->setNetCost(0);
+//            $this->failedImport[] = $product;
 //        }
-//        return $this->failedImport;
+//
+//    }
+
+    public function checkLowCostAndStock(Product $product)
+    {
+        if ($product->getNetCost() < 5 && $product->getProductStock() < 10 ) {
+            $this->failedImport[] = $product;
+        }
+        $this->successfulImport[] = $product;
+    }
+
+    public function checkHighCost(Product $product)
+    {
+        if ($product->getNetCost() > 1000 ) {
+            $this->failedImport[] = $product;
+        }
+        $this->successfulImport[] = $product;
     }
 
     /**

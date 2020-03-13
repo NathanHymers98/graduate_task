@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c35f3046-c304-4704-846e-c77211a6f1c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Service/ObjectValidator.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UploadProductFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UploadProductFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/stock-5e68dc50ad35f.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/stock-5e68deb9b07c4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/stock-5e68e7221cceb.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/stock-5e68f410bd0bc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ObjectValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ObjectValidator.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +163,7 @@
       <workItem from="1583915196130" duration="15240000" />
       <workItem from="1583940473356" duration="85000" />
       <workItem from="1583998333864" duration="17572000" />
-      <workItem from="1584083436181" duration="15378000" />
+      <workItem from="1584083436181" duration="20186000" />
     </task>
     <servers />
   </component>

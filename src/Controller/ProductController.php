@@ -53,6 +53,10 @@ class ProductController extends AbstractController
             $data = $serializer->decode(file_get_contents($directory), 'csv');
 
             foreach ($data as $item) {
+                if(!array_key_exists('Stock', $item) || !array_key_exists('Cost in GBP', $item)){
+                    $validator->setFailedImport($item);
+                    continue;
+                }
                 $product = (new Product())
                     ->setProductCode($item['Product Code'] ?? null)
                     ->setProductName($item['Product Name'] ?? null)
@@ -67,19 +71,20 @@ class ProductController extends AbstractController
 //            }
 //
 //            foreach ($uploadedProductCollection as $item) { // Iterating over the collection the same amount of times as there are objects inside it.
-                //$validator = new ObjectValidator($product);
-                $validator->emptyEntry($product);
+                //$validator->emptyEntry($product);
                 $validator->validateDiscontinued($product);
+                $validator->checkLowCostAndStock($product);
+                $validator->checkHighCost($product);
                 $successfulProducts = $validator->getSuccessfulImport();
                 foreach ($successfulProducts as $successItem ) {
                     $entityManager->persist($successItem);
                     $entityManager->flush();
                 }
-                $failedProducts = $validator->getFailedImport();
-                foreach ($failedProducts as $failedItem) {
-                    $entityManager->persist($failedItem);
-                    $entityManager->flush();
-                }
+//                $failedProducts = $validator->getFailedImport();
+//                foreach ($failedProducts as $failedItem) {
+//                    $entityManager->persist($failedItem);
+//                    $entityManager->flush();
+//                }
 
 
             }

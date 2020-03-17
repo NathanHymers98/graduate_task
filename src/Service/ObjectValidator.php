@@ -16,15 +16,14 @@ class ObjectValidator
 
     public function standardCheck(Product $product)
     {
-        if (null == $product->getNetCost() || null == $product->getProductStock()) {
-            $this->failedImport[] = $product;
-        } elseif ($product->getNetCost() < 5 && $product->getProductStock() < 10 ) {
+        if ($product->getNetCost() < 5 && $product->getProductStock() < 10 ) {
             $this->failedImport[] = $product;
         } elseif ($product->getNetCost() > 1000) {
             $this->failedImport[] = $product;
-        } elseif ($product->getNetCost() == '$4.33') {
+        }
+        elseif ($product->getNetCost() == 0) {
             $this->failedImport[] = $product;
-        } else {
+        }else {
             $this->successfulImport[] = $product;
         }
     }

@@ -25,10 +25,10 @@ class ProductNormalizer implements DenormalizerInterface, CacheableSupportsMetho
 
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
-        if (!isset($data['Stock'])) {
+        if (!isset($data['Stock']) || !is_numeric($data['Stock'])) {
             $data['Stock'] = '0';
         }
-        if (!isset($data['Cost in GBP'])) {
+        if (!isset($data['Cost in GBP']) || !is_numeric($data['Cost in GBP'])) {
             $data['Cost in GBP'] = '0';
         }
         if (!isset($data['Discontinued'])) {

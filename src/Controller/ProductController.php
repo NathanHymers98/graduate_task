@@ -73,6 +73,7 @@ class ProductController extends AbstractController
         }
 
 
+
         return $this->render('product/upload.html.twig', [
             'productForm' => $form->createView(),
         ]);

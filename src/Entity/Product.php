@@ -39,7 +39,7 @@ class Product
     private $productManufacture;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $productStock;
 
@@ -57,19 +57,6 @@ class Product
      * @ORM\Column(type="string")
      */
     private $isDiscontinued;
-
-//    public function createFormArray(array $data)
-//    {
-//        $i = new self();
-//        $i->productCode = $data['Product Code'] ?? null;
-//        $i->productName = $data['Product Name'] ?? null;
-//        $i->productDescription = $data['Product Description'] ?? null;
-//        $i->productStock = $data['Stock'] ?? null;
-//        $i->netCost = $data['Cost in GBP'] ?? null;
-//        $i->isDiscontinued = $data['Discontinued'] ?? null;
-//
-//        return $i;
-//    }
 
     public function getId(): ?int
     {
@@ -124,24 +111,24 @@ class Product
         return $this;
     }
 
-    public function getProductStock(): ?string
+    public function getProductStock(): ?int
     {
         return $this->productStock;
     }
 
-    public function setProductStock(string $productStock): ?self
+    public function setProductStock(int $productStock): ?self
     {
         $this->productStock = $productStock;
 
         return $this;
     }
 
-    public function getNetCost(): ?string
+    public function getNetCost(): ?float
     {
         return $this->netCost;
     }
 
-    public function setNetCost(string $netCost): self
+    public function setNetCost(float $netCost): self
     {
         $this->netCost = $netCost;
 

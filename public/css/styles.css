@@ -10,9 +10,14 @@ html {height:100%}
 /* NAVIGATION */
 
 .navbar{
-    background-color: #718C00;
+    background-color: #718C00; !important;
 }
 
+/* UPLOAD FORM */
+
+.product-upload{
+    padding: 5%;
+}
 
 /* LOGIN REGISTRATION */
 

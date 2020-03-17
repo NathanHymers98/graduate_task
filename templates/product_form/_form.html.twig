@@ -1,5 +1,11 @@
-
-{{ form_start(productForm) }}
-    {{ form_row(productForm.uploadFile) }}
-<button type="submit" class="btn btn-primary">Upload</button>
-{{ form_end(productForm) }}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 product-upload">
+            <h1>Please select a file to upload</h1>
+            {{ form_start(productForm) }}
+            {{ form_row(productForm.uploadFile) }}
+            <button type="submit" class="btn btn-primary">Upload</button>
+            {{ form_end(productForm) }}
+        </div>
+    </div>
+</div>

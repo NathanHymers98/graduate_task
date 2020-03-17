@@ -35,7 +35,15 @@ class ProductNormalizer implements DenormalizerInterface, CacheableSupportsMetho
             $data['Discontinued'] = '';
         }
 
-        return $data;
+        $product = new Product();
+            $product->setProductCode($data['Product Code']);
+            $product->setProductName($data['Product Name']);
+            $product->setProductDescription($data['Product Description']);
+            $product->setProductStock($data['Stock']);
+            $product->setNetCost($data['Cost in GBP']);
+            $product->setIsDiscontinued($data['Discontinued']);
+
+        return $product;
     }
 
     public function supportsDenormalization($data, string $type, string $format = null)

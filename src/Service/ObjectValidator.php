@@ -8,11 +8,11 @@ use App\Entity\Product;
 
 class ObjectValidator
 {
-    //private $product;
 
     private $failedImport = array();
 
     private $successfulImport = array();
+
 
     public function standardCheck(Product $product)
     {

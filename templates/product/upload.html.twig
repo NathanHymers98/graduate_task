@@ -4,19 +4,4 @@
 {{ include('product_form/_form.html.twig', {
     button_text: 'Upload'
 }) }}
-    {{ validation }}
-    {% for Item in validation %}
-
-        {{ Item }}
-        <table>
-            <tr>
-                <th>Product Code</th>
-                <th>Product Name</th>
-            </tr>
-            <tr>
-                <td></td>
-
-            </tr>
-        </table>
-    {% endfor %}
 {% endblock %}

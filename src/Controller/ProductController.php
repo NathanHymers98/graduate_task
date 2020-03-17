@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\UploadProductFormType;
+use App\Serializer\Normalizer\ProductNormalizer;
 use App\Service\ObjectValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +31,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/upload", name="app_upload")
      */
-    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator)
+    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator, ProductNormalizer $productNormalizer)
     {
 
         $form = $this->createForm(UploadProductFormType::class);
@@ -42,7 +43,7 @@ class ProductController extends AbstractController
 
             $destination = $this->getParameter('kernel.project_dir').'/uploads';
             $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME); // gets filename with no extension
-            $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->getClientOriginalExtension();
+            $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->getClientOriginalExtension(); // applies a unique identifier to the original filename
             $directory = $destination.'/'.$newFilename;
 
             $uploadedFile->move(
@@ -71,31 +72,21 @@ class ProductController extends AbstractController
 //            }
 //
 //            foreach ($uploadedProductCollection as $item) { // Iterating over the collection the same amount of times as there are objects inside it.
-                //$validator->emptyEntry($product);
+                $validator->standardCheck($product);
                 $validator->validateDiscontinued($product);
-                $validator->checkLowCostAndStock($product);
-                $validator->checkHighCost($product);
+                }
                 $successfulProducts = $validator->getSuccessfulImport();
                 foreach ($successfulProducts as $successItem ) {
                     $entityManager->persist($successItem);
                     $entityManager->flush();
-                }
-//                $failedProducts = $validator->getFailedImport();
-//                foreach ($failedProducts as $failedItem) {
-//                    $entityManager->persist($failedItem);
-//                    $entityManager->flush();
-//                }
-
-
             }
 
-            $this->addFlash('success', 'File uploaded');
-
-            return $this->redirectToRoute('app_homepage');
+            return $this->redirectToRoute('app_upload');
         }
 
         return $this->render('product/upload.html.twig', [
             'productForm' => $form->createView(),
+             'validation' => $validator,
         ]);
         }
 }

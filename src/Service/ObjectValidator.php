@@ -14,48 +14,38 @@ class ObjectValidator
 
     private $successfulImport = array();
 
-//    public function __construct(Product $product)
-//    {
-//        $this->product = $product;
-//
-//    }
+    public function standardCheck(Product $product)
+    {
+        if (null == $product->getNetCost() || null == $product->getProductStock()) {
+            $this->failedImport[] = $product;
+        } elseif ($product->getNetCost() < 5 && $product->getProductStock() < 10 ) {
+            $this->failedImport[] = $product;
+        } elseif ($product->getNetCost() > 1000) {
+            $this->failedImport[] = $product;
+        } elseif ($product->getNetCost() == '$4.33') {
+            $this->failedImport[] = $product;
+        } else {
+            $this->successfulImport[] = $product;
+        }
+    }
 
     public function validateDiscontinued(Product $product) // If an item is discontinued, attach the current date there instead
     {
         $date = new \DateTime();
         if ($product->getIsDiscontinued() == null) {
-            $product->setIsDiscontinued('no');
-            $this->successfulImport[] = $product;
+            $product->setIsDiscontinued('No');
         } elseif ($product->getIsDiscontinued() == 'yes') {
             $product->setIsDiscontinued('Yes, discontinued on: '.$date->format('Y-m-d'));
-            $this->successfulImport[] = $product;
         }
     }
 
-//    public function emptyEntry(Product $product)
+//    public function removeDuplicates(Product $product)
 //    {
-//        if(empty($product->getProductStock() || empty($product->getNetCost()))) {
-//            $product->setProductStock(0) || $product->setNetCost(0);
-//            $this->failedImport[] = $product;
+//       if ($product->getNetCost() == '$4.33') {
+//           $this->failedImport[] = $product;
 //        }
-//
 //    }
 
-    public function checkLowCostAndStock(Product $product)
-    {
-        if ($product->getNetCost() < 5 && $product->getProductStock() < 10 ) {
-            $this->failedImport[] = $product;
-        }
-        $this->successfulImport[] = $product;
-    }
-
-    public function checkHighCost(Product $product)
-    {
-        if ($product->getNetCost() > 1000 ) {
-            $this->failedImport[] = $product;
-        }
-        $this->successfulImport[] = $product;
-    }
 
     /**
      * @return array
@@ -70,7 +60,7 @@ class ObjectValidator
      */
     public function setFailedImport(array $failedImport): void
     {
-        $this->failedImport = $failedImport;
+        $this->failedImport[] = $failedImport;
     }
 
     /**
@@ -86,7 +76,7 @@ class ObjectValidator
      */
     public function setSuccessfulImport(array $successfulImport): void
     {
-        $this->successfulImport = $successfulImport;
+        $this->successfulImport[] = $successfulImport;
     }
 
 

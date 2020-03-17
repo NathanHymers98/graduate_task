@@ -4,4 +4,15 @@
 {% endblock %}
 {% block body %}
 <h1>Products</h1>
+    {% for successItem in successfulImport %}
+    <table>
+        <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+        </tr>
+        <tr>
+            <td>{{ item.successItem }}</td>
+        </tr>
+    </table>
+    {% endfor %}
 {% endblock %}

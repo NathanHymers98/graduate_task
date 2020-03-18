@@ -16,12 +16,12 @@ class UploadProductFormType extends AbstractType
     {
         $builder
             ->add('uploadFile', FileType::class, [
-//                'constraints' => [
-//                    new File([
-//                        'mimeTypes' => 'text/csv',
-//                        'mimeTypesMessage' => 'Please upload a valid CSV file'
-//                    ])
-//                ],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => 'text/plain',
+                        'mimeTypesMessage' => 'Please upload a valid CSV file'
+                    ])
+                ],
                 'mapped' => false
             ])
         ;

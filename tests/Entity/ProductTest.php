@@ -13,6 +13,7 @@ class ProductTest extends TestCase
     {
         $product = new Product();
 
-
+        $product->setProductStock(10);
+        $this->assertSame(10, $product->getProductStock());
     }
 }

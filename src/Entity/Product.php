@@ -19,7 +19,6 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Unique(message="Product code must be unique")
      */
     private $productCode;
 
@@ -57,6 +56,27 @@ class Product
      * @ORM\Column(type="string")
      */
     private $isDiscontinued;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isSuccessful = true;
+
+    /**
+     * @return bool
+     */
+    public function isSuccessful(): bool
+    {
+        return $this->isSuccessful;
+    }
+
+    /**
+     * @param bool $isSuccessful
+     */
+    public function setIsSuccessful(bool $isSuccessful): void
+    {
+        $this->isSuccessful = $isSuccessful;
+    }
 
     public function getId(): ?int
     {

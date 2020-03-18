@@ -2,23 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c35f3046-c304-4704-846e-c77211a6f1c6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/graduate_task.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/graduate_task.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200310123406.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200310123406.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200310132110.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200310132110.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200310150336.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200310150336.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200312083240.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200312083240.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200312100719.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200312100719.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200313133005.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200313133005.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200313133618.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200313133618.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Serializer/Normalizer/ProductNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serializer/Normalizer/ProductNormalizer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200317104036.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/old_migrations/Version20200317104036.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/ObjectValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ObjectValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/product/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/upload.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/upload.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product_form/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product_form/_form.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +138,9 @@
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/php-amqplib/php-amqplib" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/bin/.phpunit" />
     </include_path>
   </component>
   <component name="ProjectId" id="1YwATkhD98LOwHQPsBMu2B7Dzxo" />
@@ -157,16 +155,17 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/old_migrations" />
       <recent name="$PROJECT_DIR$/public/css" />
       <recent name="$PROJECT_DIR$/src/Migrations" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -185,7 +184,9 @@
       <workItem from="1583998333864" duration="17572000" />
       <workItem from="1584083436181" duration="20343000" />
       <workItem from="1584342269034" duration="19588000" />
-      <workItem from="1584428503761" duration="15310000" />
+      <workItem from="1584428503761" duration="15430000" />
+      <workItem from="1584514854391" duration="6463000" />
+      <workItem from="1584524285923" duration="3931000" />
     </task>
     <servers />
   </component>
@@ -193,26 +194,26 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser" timestamp="1584429052877">
+    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser" timestamp="1584534186202">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584429052877" />
+    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584534186202" />
     <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583917874210">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
     <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583917874210" />
-    <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1584024740648">
+    <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1584521866935">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1120" y="617" key="NewPhpClassDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584024740648" />
-    <state x="941" y="449" key="SettingsEditor" timestamp="1584099160523">
+    <state x="1120" y="617" key="NewPhpClassDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584521866935" />
+    <state x="941" y="449" key="SettingsEditor" timestamp="1584521853643">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="941" y="449" key="SettingsEditor/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584099160523" />
-    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog" timestamp="1583998335202">
+    <state x="941" y="449" key="SettingsEditor/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584521853643" />
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog" timestamp="1584514855228">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583998335202" />
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584514855228" />
     <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup" timestamp="1584362745103">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>

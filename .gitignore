@@ -16,3 +16,4 @@
 ###< symfony/phpunit-bridge ###
 
 /uploads/
+/src/old_migrations/

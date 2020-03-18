@@ -14,8 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
-use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -60,19 +58,15 @@ class ProductController extends AbstractController
                 $product = $normalizer->denormalize($item, Product::class);
                 $validator->standardCheck($product);
                 $validator->validateDiscontinued($product);
-                }
-            $successfulProducts = $validator->getSuccessfulImport();
-            foreach ($successfulProducts as $successItem) {
-                $entityManager->persist($successItem);
-                $entityManager->flush();
-            }
 
-            $this->addFlash('success', 'CSV Imported');
+                $entityManager->persist($product);
+                $entityManager->flush();
+                }
+
+            $this->addFlash('success', 'Import was successful');
 
             return $this->redirectToRoute('app_list');
         }
-
-
 
         return $this->render('product/upload.html.twig', [
             'productForm' => $form->createView(),
@@ -85,10 +79,13 @@ class ProductController extends AbstractController
      */
     public function listAction(ProductRepository $productRepository)
     {
-        $products = $productRepository->findAll();
+
+        $products = $productRepository->findBy(['isSuccessful' => true ]);
+        $failedProducts = $productRepository->findBy(['isSuccessful' => false ]);
 
         return $this->render('product/list.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'failedProducts' => $failedProducts,
         ]);
     }
 }

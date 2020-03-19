@@ -35,7 +35,7 @@ class ProductController extends AbstractController
      * @Route("/upload", name="app_upload")
      * @IsGranted("ROLE_USER")
      */
-    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator, NormalizerInterface $normalizer, ProductNormalizer $productNormalizer)
+    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator, NormalizerInterface $normalizer, ProductNormalizer $productNormalizer, UploaderHelper $uploaderHelper)
     {
 
         $form = $this->createForm(UploadProductFormType::class);
@@ -45,15 +45,16 @@ class ProductController extends AbstractController
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form->get('uploadFile')->getData();
 
-            $destination = $this->getParameter('kernel.project_dir') . '/uploads';
-            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME); // gets filename with no extension
-            $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->getClientOriginalExtension(); // applies a unique identifier to the original filename
-            $directory = $destination . '/' . $newFilename;
-
-            $uploadedFile->move(
-                $destination,
-                $newFilename
-            );
+            $directory = $uploaderHelper->uploadFile($uploadedFile);
+//            $destination = $this->getParameter('kernel.project_dir') . '/uploads';
+//            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME); // gets filename with no extension
+//            $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->getClientOriginalExtension(); // applies a unique identifier to the original filename
+//            $directory = $destination . '/' . $newFilename;
+//
+//            $uploadedFile->move(
+//                $destination,
+//                $newFilename
+//            );
 
             $data = $serializer->decode(file_get_contents($directory), 'csv'); // serializing the csv data into an array
 

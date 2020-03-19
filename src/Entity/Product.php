@@ -63,6 +63,27 @@ class Product
     private $isSuccessful = true;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $reasonsForFailure = 'N/A';
+
+    /**
+     * @return string
+     */
+    public function getReasonsForFailure(): string
+    {
+        return $this->reasonsForFailure;
+    }
+
+    /**
+     * @param string $reasonsForFailure
+     */
+    public function setReasonsForFailure(string $reasonsForFailure): void
+    {
+        $this->reasonsForFailure = $reasonsForFailure;
+    }
+
+    /**
      * @return bool
      */
     public function isSuccessful(): bool

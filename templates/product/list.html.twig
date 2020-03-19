@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="sol-sm-12">
-                <h1>List of successful imported products</h1>
+                <h1>Successful Imports</h1>
                 <table class="table table-striped table-bordered">
                     <tr>
                         <th>Product Code</th>
@@ -15,8 +15,8 @@
                         <th>Stock</th>
                         <th>Cost in GBP</th>
                         <th>Discontinued</th>
+                        <th>Reason for failure (If applicable)</th>
                     </tr>
-
                     <tbody>
                     {% for product in products %}
                         <tr>
@@ -26,14 +26,15 @@
                             <td>{{ product.productStock }}</td>
                             <td>{{ product.netCost }}</td>
                             <td>{{ product.isDiscontinued }}</td>
+                            <td>{{ product.reasonsForFailure }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
 
-                <h1>List of failed imported products</h1>
-                <table class="table table-striped table-bordered">
 
+                <h1>Failed Imports</h1>
+                <table class="table table-striped table-bordered">
                     <tr>
                         <th>Product Code</th>
                         <th>Product Name</th>
@@ -41,8 +42,8 @@
                         <th>Stock</th>
                         <th>Cost in GBP</th>
                         <th>Discontinued</th>
+                        <th>Reason for failure (If applicable)</th>
                     </tr>
-
                     <tbody>
                     {% for product in failedProducts %}
                         <tr>
@@ -52,6 +53,7 @@
                             <td>{{ product.productStock }}</td>
                             <td>{{ product.netCost }}</td>
                             <td>{{ product.isDiscontinued }}</td>
+                            <td>{{ product.reasonsForFailure }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

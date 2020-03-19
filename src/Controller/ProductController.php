@@ -9,7 +9,9 @@ use App\Form\UploadProductFormType;
 use App\Repository\ProductRepository;
 use App\Serializer\Normalizer\ProductNormalizer;
 use App\Service\ObjectValidator;
+use App\Service\UploaderHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +33,7 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/upload", name="app_upload")
+     * @IsGranted("ROLE_USER")
      */
     public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator, NormalizerInterface $normalizer, ProductNormalizer $productNormalizer)
     {
@@ -76,6 +79,7 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/list", name="app_list")
+     * @IsGranted("ROLE_USER")
      */
     public function listAction(ProductRepository $productRepository)
     {

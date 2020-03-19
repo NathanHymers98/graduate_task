@@ -46,15 +46,6 @@ class ProductController extends AbstractController
             $uploadedFile = $form->get('uploadFile')->getData();
 
             $directory = $uploaderHelper->uploadFile($uploadedFile);
-//            $destination = $this->getParameter('kernel.project_dir') . '/uploads';
-//            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME); // gets filename with no extension
-//            $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->getClientOriginalExtension(); // applies a unique identifier to the original filename
-//            $directory = $destination . '/' . $newFilename;
-//
-//            $uploadedFile->move(
-//                $destination,
-//                $newFilename
-//            );
 
             $data = $serializer->decode(file_get_contents($directory), 'csv'); // serializing the csv data into an array
 

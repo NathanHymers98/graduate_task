@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 class ProductController extends AbstractController
@@ -35,7 +35,7 @@ class ProductController extends AbstractController
      * @Route("/upload", name="app_upload")
      * @IsGranted("ROLE_USER")
      */
-    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator, NormalizerInterface $normalizer, ProductNormalizer $productNormalizer, UploaderHelper $uploaderHelper)
+    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator, NormalizerInterface $normalizer, ProductNormalizer $productNormalizer, UploaderHelper $uploaderHelper, ValidatorInterface $validatorInterface)
     {
 
         $form = $this->createForm(UploadProductFormType::class);
@@ -51,7 +51,9 @@ class ProductController extends AbstractController
 
             foreach ($data as $item) { // Looping over each item in the array transforming them into Product objects
                 $product = $normalizer->denormalize($item, Product::class);
-                $validator->standardCheck($product);
+                $validator->lessThanFive($validatorInterface, $product);
+
+//                $validator->standardCheck($product);
                 $validator->validateDiscontinued($product);
 
                 $entityManager->persist($product);

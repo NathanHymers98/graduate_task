@@ -44,6 +44,8 @@ class Product
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\GreaterThanOrEqual(5, message="Cost cannot be lower than £5")
+     * @Assert\LessThanOrEqual(1000, message="Cost cannot be greater than £1000")
      */
     private $netCost;
 

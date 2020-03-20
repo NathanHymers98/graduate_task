@@ -5,7 +5,9 @@ namespace App\Service;
 
 
 use App\Entity\Product;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ObjectValidator
 {
@@ -15,21 +17,38 @@ class ObjectValidator
     const  STOCK_TO_LOW = 'Stock is less than 10.';
 
 
-    public function standardCheck(Product $product) // Checks for any invalidated products against the import rules
+    public function lessThanFive(ValidatorInterface $validator, Product $product)
     {
-        if ($product->getNetCost() < 5) {
+        $errors = $validator->validate($product);
+
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->getMessage();
+            }
             $product->setIsSuccessful(false);
-            $product->setReasonsForFailure(self::COST_TO_LOW);
-        }elseif ($product->getNetCost() > 1000) {
-            $product->setIsSuccessful(false);
-            $product->setReasonsForFailure(self::COST_TO_HIGH);
-        }elseif ($product->getProductStock() < 10) {
-            $product->setIsSuccessful(false);
-            $product->setReasonsForFailure(self::STOCK_TO_LOW);
-        }else {
-            $product->setIsSuccessful(true);
+            $product->setReasonsForFailure(implode(',', $errorMessages));
+            return implode(',', $errorMessages);
         }
+        return '';
     }
+
+
+//    public function standardCheck(Product $product) // Checks for any invalidated products against the import rules
+//    {
+//        if ($product->getNetCost() < 5) {
+//            $product->setIsSuccessful(false);
+//            $product->setReasonsForFailure(self::COST_TO_LOW);
+//        }elseif ($product->getNetCost() > 1000) {
+//            $product->setIsSuccessful(false);
+//            $product->setReasonsForFailure(self::COST_TO_HIGH);
+//        }elseif ($product->getProductStock() < 10) {
+//            $product->setIsSuccessful(false);
+//            $product->setReasonsForFailure(self::STOCK_TO_LOW);
+//        }else {
+//            $product->setIsSuccessful(true);
+//        }
+//    }
 
     public function validateDiscontinued(Product $product) // If an item is discontinued, attach the current date there instead
     {

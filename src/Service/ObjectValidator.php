@@ -15,7 +15,7 @@ class ObjectValidator
     const  STOCK_TO_LOW = 'Stock is less than 10.';
 
 
-    public function standardCheck(Product $product)
+    public function standardCheck(Product $product) // Checks for any invalidated products against the import rules
     {
         if ($product->getNetCost() < 5) {
             $product->setIsSuccessful(false);

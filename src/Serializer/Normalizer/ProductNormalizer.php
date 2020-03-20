@@ -25,7 +25,7 @@ class ProductNormalizer implements DenormalizerInterface, CacheableSupportsMetho
 
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
-        if (!isset($data['Stock']) || !is_numeric($data['Stock'])) {
+        if (!isset($data['Stock']) || !is_numeric($data['Stock'])) { // Setting default values for products that are poorly formatted in the CSV
             $data['Stock'] = '0';
         }
         if (!isset($data['Cost in GBP']) || !is_numeric($data['Cost in GBP'])) {

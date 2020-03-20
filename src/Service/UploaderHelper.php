@@ -16,7 +16,7 @@ class UploaderHelper
         $this->uploadsPath = $uploadsPath;
     }
 
-    public function uploadFile(UploadedFile $uploadedFile)
+    public function uploadFile(UploadedFile $uploadedFile) // Handles the renaming and moving of a file
     {
         $destination = $this->uploadsPath. '/uploads';
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME); // gets filename with no extension

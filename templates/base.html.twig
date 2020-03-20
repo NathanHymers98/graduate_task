@@ -24,17 +24,26 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="{{ path('app_homepage') }}">Home <span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link" href="{{ path('app_upload') }}">Upload a File</a>
-                        {% if app.user %}
-                        <a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a>
-                        {% else %}
-                        <a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a>
-                        <a class="nav-item nav-link" href="{{ path('app_register') }}">Register</a>
-                        {% endif %}
+                            <a class="nav-item nav-link active" href="{{ path('app_homepage') }}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-item nav-link" href="{{ path('app_upload') }}">Upload a File</a>
+                            {% if app.user %}
+                                <a class="nav-item nav-link" href="{{ path('app_list') }}">List of Products</a>
+                                <a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a>
+                                <a class="nav-item nav-link" href="{{ path('app_register') }}">Register</a>
+                            {% endif %}
                     </div>
                 </div>
             </nav>
+        {% endblock %}
+
+        {% block loggedin %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}
+                </div>
+            {% endif %}
         {% endblock %}
 
         {% for message in app.flashes('success') %}

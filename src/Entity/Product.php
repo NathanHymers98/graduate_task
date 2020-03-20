@@ -39,6 +39,7 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\LessThanOrEqual(10, message="Stock must not be less than 10")
      */
     private $productStock;
 

@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @UniqueEntity("productCode", message="Product Code must be unique")
  */
 class Product
 {
@@ -39,7 +41,7 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\LessThanOrEqual(10, message="Stock must not be less than 10")
+     * @Assert\GreaterThanOrEqual(10, message="Stock must not be less than 10")
      */
     private $productStock;
 

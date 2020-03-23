@@ -6,7 +6,7 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class UploaderHelper
+class UploaderHelper // This class's only job is to handle the upload of the file and returns the directory of such file to the ProductController
 {
 
     private $uploadsPath;

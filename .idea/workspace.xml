@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c35f3046-c304-4704-846e-c77211a6f1c6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/graduate_task.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/graduate_task.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_task.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/receive.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/send.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Serializer/Normalizer/ProductNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serializer/Normalizer/ProductNormalizer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ObjectValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ObjectValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/UploaderHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UploaderHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,9 +143,13 @@
       <path value="$PROJECT_DIR$/vendor/php-amqplib/php-amqplib" />
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
       <path value="$PROJECT_DIR$/vendor/bin/.phpunit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/messenger" />
     </include_path>
   </component>
   <component name="ProjectId" id="1YwATkhD98LOwHQPsBMu2B7Dzxo" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -187,6 +203,7 @@
       <workItem from="1584601628050" duration="10869000" />
       <workItem from="1584644420663" duration="5254000" />
       <workItem from="1584687525402" duration="8095000" />
+      <workItem from="1584947100122" duration="2712000" />
     </task>
     <servers />
   </component>
@@ -212,22 +229,24 @@
     </state>
     <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584691351160" />
     <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584534186202" />
-    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583917874210">
+    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584950281539">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
+    <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584950281539" />
     <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583917874210" />
-    <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1584691258580">
+    <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1584949807788">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1120" y="617" key="NewPhpClassDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584691258580" />
+    <state x="1120" y="617" key="NewPhpClassDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584949807788" />
     <state x="1120" y="617" key="NewPhpClassDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584521866935" />
     <state x="941" y="449" key="SettingsEditor" timestamp="1584540780236">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
     <state x="941" y="449" key="SettingsEditor/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584540780236" />
-    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog" timestamp="1584514855228">
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog" timestamp="1584947100608">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584947100608" />
     <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584514855228" />
     <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup" timestamp="1584362745103">
       <screen x="0" y="0" width="2880" height="1620" />

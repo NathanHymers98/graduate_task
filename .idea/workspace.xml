@@ -7,15 +7,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_task.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/receive.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/send.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/messenger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/messenger.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Serializer/Normalizer/ProductNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serializer/Normalizer/ProductNormalizer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ObjectValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ObjectValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/UploaderHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UploaderHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Message/QueueUploadedFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message/QueueUploadedFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MessageHandler/QueueUploadedFileHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/MessageHandler/QueueUploadedFileHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +142,13 @@
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
       <path value="$PROJECT_DIR$/vendor/bin/.phpunit" />
       <path value="$PROJECT_DIR$/vendor/symfony/messenger" />
+      <path value="$PROJECT_DIR$/vendor/enqueue/null" />
+      <path value="$PROJECT_DIR$/vendor/enqueue/dsn" />
+      <path value="$PROJECT_DIR$/vendor/enqueue/enqueue-bundle" />
+      <path value="$PROJECT_DIR$/vendor/enqueue/enqueue" />
+      <path value="$PROJECT_DIR$/vendor/queue-interop/queue-interop" />
+      <path value="$PROJECT_DIR$/vendor/queue-interop/amqp-interop" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
     </include_path>
   </component>
   <component name="ProjectId" id="1YwATkhD98LOwHQPsBMu2B7Dzxo" />
@@ -168,7 +173,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -203,7 +208,11 @@
       <workItem from="1584601628050" duration="10869000" />
       <workItem from="1584644420663" duration="5254000" />
       <workItem from="1584687525402" duration="8095000" />
-      <workItem from="1584947100122" duration="2712000" />
+      <workItem from="1584947100122" duration="9915000" />
+      <workItem from="1584965850378" duration="963000" />
+      <workItem from="1584966892531" duration="3164000" />
+      <workItem from="1584972968389" duration="3601000" />
+      <workItem from="1585033381786" duration="4553000" />
     </task>
     <servers />
   </component>
@@ -224,33 +233,39 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser" timestamp="1584691351160">
+    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser" timestamp="1584959701436">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584691351160" />
+    <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584959701436" />
     <state x="1217" y="533" key="#com.intellij.ide.util.MemberChooser/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584534186202" />
     <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584950281539">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
     <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584950281539" />
     <state x="1182" y="303" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1583917874210" />
+    <state x="1178" y="572" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584951472202">
+      <screen x="0" y="0" width="2880" height="1620" />
+    </state>
+    <state x="1178" y="572" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584951472202" />
     <state x="1120" y="617" key="NewPhpClassDialog" timestamp="1584949807788">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
     <state x="1120" y="617" key="NewPhpClassDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584949807788" />
     <state x="1120" y="617" key="NewPhpClassDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584521866935" />
-    <state x="941" y="449" key="SettingsEditor" timestamp="1584540780236">
+    <state x="941" y="449" key="SettingsEditor" timestamp="1584972958245">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
+    <state x="941" y="449" key="SettingsEditor/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584972958245" />
     <state x="941" y="449" key="SettingsEditor/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584540780236" />
-    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog" timestamp="1584947100608">
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog" timestamp="1585033382262">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
-    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584947100608" />
+    <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1585033382262" />
     <state x="1100" y="642" key="com.intellij.ide.util.TipDialog/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584514855228" />
-    <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup" timestamp="1584362745103">
+    <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup" timestamp="1584976440271">
       <screen x="0" y="0" width="2880" height="1620" />
     </state>
+    <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup/2880.-34.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584976440271" />
     <state x="1105" y="376" width="670" height="676" key="search.everywhere.popup/2880.0.3008.1692/0.0.2880.1620@0.0.2880.1620" timestamp="1584362745103" />
   </component>
 </project>

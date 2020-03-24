@@ -47,20 +47,20 @@ class ProductController extends AbstractController
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form->get('uploadFile')->getData();
 
-            $message = new QueueUploadedFile();
+            $message = new QueueUploadedFile($uploadedFile);
             $messageBus->dispatch($message);
 
-            $directory = $uploaderHelper->uploadFile($uploadedFile);
-
-            $data = $serializer->decode(file_get_contents($directory), 'csv'); // serializing the csv data into an array
-
-            foreach ($data as $item) { // Looping over each item in the array transforming them into Product objects, then validating them before persisting them to the database
-                $product = $normalizer->denormalize($item, Product::class);
-                $validator->standardCheck($validatorInterface, $product);
-                $validator->validateDiscontinued($product);
-                $entityManager->persist($product);
-                $entityManager->flush();
-                }
+//            $directory = $uploaderHelper->uploadFile($uploadedFile);
+//
+//            $data = $serializer->decode(file_get_contents($directory), 'csv'); // serializing the csv data into an array
+//
+//            foreach ($data as $item) { // Looping over each item in the array transforming them into Product objects, then validating them before persisting them to the database
+//                $product = $normalizer->denormalize($item, Product::class);
+//                $validator->standardCheck($validatorInterface, $product);
+//                $validator->validateDiscontinued($product);
+//                $entityManager->persist($product);
+//                $entityManager->flush();
+//                }
 
             $this->addFlash('success', 'Import was successful');
 

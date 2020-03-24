@@ -204,4 +204,17 @@ class Product
 
         return $this;
     }
+
+    public function getDetails() // This get method is used for testing purposes.
+    {
+        return sprintf(
+          'The product code should be: %s The product name should be %s The product description should be: %s The cost should be: %s The stock should be: %s The products discontinued value should be: %s',
+            $this->getProductCode(),
+            $this->getProductName(),
+            $this->getProductDescription(),
+            $this->getNetCost(),
+            $this->getProductStock(),
+            $this->getIsDiscontinued()
+        );
+    }
 }

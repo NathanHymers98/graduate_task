@@ -6,6 +6,22 @@
     <div class="container">
         <div class="row">
             <div class="sol-sm-12">
+                <h1>Search for a product</h1>
+                <form action="">
+                <div class="input-group mb-3 mt-3">
+                    <input type="text"
+                           name="q"
+                           class="fa fa-search form-control"
+                           placeholder="Search for a product...">
+                    <div class="input-group-append">
+                        <button type="submit"
+                                class="btn btn-secondary">
+                        </button>
+                    </div>
+                </div>
+                    <p>The amount of successful products listed: {{ successfulCount }}</p>
+                    <p>The amount of failed products listed: {{ failedCount }}</p>
+                </form>
                 <h1>Successful Imports</h1>
                 <table class="table table-striped table-bordered">
                     <tr>

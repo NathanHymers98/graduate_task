@@ -4,24 +4,15 @@
 namespace App\Controller;
 
 
-use App\Entity\Product;
 use App\Form\UploadProductFormType;
 use App\Message\QueueUploadedFile;
 use App\Repository\ProductRepository;
-use App\Serializer\Normalizer\ProductNormalizer;
-use App\Service\ObjectValidator;
-use App\Service\UploaderHelper;
-use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-
 
 class ProductController extends AbstractController
 {
@@ -37,7 +28,7 @@ class ProductController extends AbstractController
      * @Route("/upload", name="app_upload")
      * @IsGranted("ROLE_USER")
      */
-    public function upload(EntityManagerInterface $entityManager, Request $request, SerializerInterface $serializer, ObjectValidator $validator, NormalizerInterface $normalizer, ProductNormalizer $productNormalizer, UploaderHelper $uploaderHelper, ValidatorInterface $validatorInterface, MessageBusInterface $messageBus)
+    public function upload(Request $request, MessageBusInterface $messageBus)
     {
 
         $form = $this->createForm(UploadProductFormType::class);
@@ -49,18 +40,6 @@ class ProductController extends AbstractController
 
             $message = new QueueUploadedFile($uploadedFile);
             $messageBus->dispatch($message);
-
-//            $directory = $uploaderHelper->uploadFile($uploadedFile);
-//
-//            $data = $serializer->decode(file_get_contents($directory), 'csv'); // serializing the csv data into an array
-//
-//            foreach ($data as $item) { // Looping over each item in the array transforming them into Product objects, then validating them before persisting them to the database
-//                $product = $normalizer->denormalize($item, Product::class);
-//                $validator->standardCheck($validatorInterface, $product);
-//                $validator->validateDiscontinued($product);
-//                $entityManager->persist($product);
-//                $entityManager->flush();
-//                }
 
             $this->addFlash('success', 'Import was successful');
 
@@ -77,15 +56,21 @@ class ProductController extends AbstractController
      * @Route("/list", name="app_list")
      * @IsGranted("ROLE_USER")
      */
-    public function listAction(ProductRepository $productRepository) // Shows two tables, one with successful products and another with failed products
+    public function listAction(ProductRepository $productRepository, Request $request) // Shows two tables, one with successful products and another with failed products
     {
+        $q = $request->query->get('q');
+        $products = $productRepository->findAllWithSearch($q, true);
+        $failedProducts = $productRepository->findAllWithSearch($q, false);
 
-        $products = $productRepository->findBy(['isSuccessful' => true ]);
-        $failedProducts = $productRepository->findBy(['isSuccessful' => false ]);
+        $successfulCount = count($products);
+        $failedCount = count($failedProducts);
 
         return $this->render('product/list.html.twig', [
             'products' => $products,
             'failedProducts' => $failedProducts,
+            'failedCount' => $failedCount,
+            'successfulCount' => $successfulCount
+
         ]);
     }
 }

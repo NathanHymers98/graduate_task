@@ -19,6 +19,27 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+
+    public function findAllWithSearch(?string $term, $isSuccessful) // Queries the database for either successful or failed products based on what value is passed when this method is called
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if ($isSuccessful == true) {
+            $qb->andWhere('p.isSuccessful = true');
+        } else {
+            if ($isSuccessful == false) {
+                $qb->andWhere('p.isSuccessful = false');
+            }
+        }
+            if ($term) {
+                $qb->andWhere('p.productCode LIKE :term OR p.productName LIKE :term OR p.productDescription LIKE :term OR p.productStock LIKE :term OR p.netCost LIKE :term OR p.isDiscontinued LIKE :term OR p.reasonsForFailure LIKE :term')
+                    ->setParameter('term', '%' . $term . '%');
+            }
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

@@ -29,6 +29,7 @@
                         {% if app.user %}
                             <a class="nav-item nav-link" href="{{ path('app_list') }}">List of Products</a>
                             <a class="nav-item nav-link" href="{{ path('app_cleardb') }}">Clear Database</a>
+                            <a class="nav-item nav-link" href="{{ path('app_userlist') }}">List of Usernames</a>
                             <a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a>
                             {% else %}
                                 <a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a>

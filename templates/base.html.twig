@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/styles.css') }}" type="text/css">
+        {% endblock %}
+        {% block head_css %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        {% endblock %}
+        {% block head_js %}
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block navbar %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary px-3">
+                <a class="navbar-brand" href="{{ path('app_homepage') }}">CSV Reader</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="{{ path('app_homepage') }}">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="{{ path('app_upload') }}">Upload a File</a>
+                        {% if app.user %}
+                            <a class="nav-item nav-link" href="{{ path('app_list') }}">List of Products</a>
+                            <a class="nav-item nav-link" href="{{ path('app_cleardb') }}">Clear Database</a>
+                            <a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a>
+                                <a class="nav-item nav-link" href="{{ path('app_register') }}">Register</a>
+                            {% endif %}
+                    </div>
+                </div>
+            </nav>
+        {% endblock %}
+
+        {% block loggedin %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}
+                </div>
+            {% endif %}
+        {% endblock %}
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+            {# The JS below changes the file upload area to the name of the file which is being uploaded#}
+            <script>
+            $('.custom-file-input').on('change', function(event) {
+                var inputFileSystem = event.currentTarget;
+                $(inputFileSystem).parent()
+                    .find('.custom-file-label')
+                    .html(inputFileSystem.files[0].name)
+            });
+            </script>
+        {% endblock %}
+    </body>
+</html>

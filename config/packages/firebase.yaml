@@ -1,4 +1,4 @@
 kreait_firebase:
   projects:
-    graduatetask:
-      credentials: '%kernel.project_dir%/config/graduatetask_credentials.json'
+    my_project:
+      credentials: '%kernel.project_dir%/config/my_project_credentials.json'

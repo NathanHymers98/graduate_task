@@ -1,0 +1,4 @@
+kreait_firebase:
+  projects:
+    graduatetask:
+      credentials: '%kernel.project_dir%/config/graduatetask_credentials.json'

@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Form\UploadProductFormType;
 use App\Message\QueueUploadedFile;
 use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -77,13 +78,17 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/resetdatabase", name="app_cleardb")
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function resetDatabase(EntityManagerInterface $entityManager, ProductRepository $productRepository){ // Allows me to easily reset the database for testing purposes
-        $entities = $productRepository->findAll();
+    public function resetDatabase(EntityManagerInterface $entityManager, ProductRepository $productRepository, UserRepository $userRepository){ // Allows me to easily reset the database for testing purposes
+        $prodEntities = $productRepository->findAll();
+        $userEntities = $userRepository->findAll();
 
-        foreach ($entities as $entity) {
-            $entityManager->remove($entity);
+        foreach ($prodEntities as $prodEntity) {
+            $entityManager->remove($prodEntity);
+        }
+        foreach ($userEntities as $userEntity) {
+            $entityManager->remove($userEntity);
         }
         $entityManager->flush();
 

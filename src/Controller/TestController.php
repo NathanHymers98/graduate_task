@@ -29,12 +29,12 @@ class TestController extends AbstractController
     /**
      * @Route("/test", name="test")
      */
-    public function Test(Firestore $firestore) // Adds hardcoded data to the firestore database
+    public function Test(Firestore $firestore) // Adds data to the database
     {
         $data = [
-            'name' => 'josh',
+            'name' => 'Nathan',
             'state' => 'scunny',
-            'country' => 'Donny'
+            'country' => 'donny'
         ];
         $firestore->database()->collection('sample')->document('test')->set($data);
 

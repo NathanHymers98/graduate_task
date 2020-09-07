@@ -7,10 +7,16 @@ body {
 
 html {height:100%}
 
+/* CHAT ROOM */
+
+button.btn.btn-primary.message-btn {
+    color: #1d2124;
+}
+
 /* NAVIGATION */
 
 .navbar{
-    background-color: #718C00;
+    background-color: #718C00!important;
 }
 
 /* UPLOAD FORM */
@@ -19,7 +25,68 @@ html {height:100%}
     padding: 5%;
 }
 
-/* HOMEPAGE */
+/* USER LIST */
+
+div.sol-sm-6.user-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #1d2124;
+}
+
+a.message-btn {
+    color: white;
+}
+
+/* LOGIN */
+
+body {
+    background-color: #fff;
+}
+
+button.btn.btn-primary {
+    padding: 9px;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
 
 /* LOGIN REGISTRATION */
 
@@ -37,142 +104,5 @@ html {height:100%}
 }
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-    color: #efefee;
-}
-
-
-@media (max-width: 440px) {
-    .article-title {
-        min-width: 100px;
-        max-width: 245px;
-    }
-}
-
-.article-img {
-    height: 100px;
-    width: 100px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-.article-author-img {
-    height: 25px;
-    border: 1px solid darkgray;
-}
-
-.article-details {
-    font-size: .8em;
-}
-
-/* PROFILE */
-
-.profile-img {
-    width: 150px;
-    height: auto;
-    border: 2px solid #fff;
-}
-
-.profile-name {
-    font-size: 1.5em;
-}
-
-.my-article-container {
-    background: #FFBC49;
-    border: solid 1px #efefee;
-    border-radius: 5px;
-}
-
-
-/* CREATE ARTICLE */
-
-.create-article-container {
-    min-width: 400px;
-    background-color: lightblue;
-    border-radius: 5px;
-}
-
-/* ARTICLE SHOW PAGE */
-
-.show-article-container {
-    width: 100%;
-    background-color: #fff;
-}
-
-.show-article-container.show-article-container-border-green {
-    border-top: 3px solid green;
-    border-radius: 3px;
-}
-
-.show-article-img {
-    width: 250px;
-    height: auto;
-    border-radius: 5px;
-}
-
-.show-article-title {
-    font-size: 2em;
-}
-
-.like-article, .like-article:hover {
-    color: red;
-    text-decoration: none;
-}
-
-@media (max-width: 991px) {
-    .show-article-title {
-        font-size: 1.5em;
-    }
-
-    .show-article-title-container {
-        max-width: 220px;
-    }
-}
-
-.article-text {
-    margin-top: 20px;
-}
-
-.share-icons i {
-    font-size: 1.5em;
-}
-
-.comment-container {
-    max-width: 600px;
-}
-
-.comment-img {
-    width: 50px;
-    height: auto;
-    border: 1px solid darkgray;
-}
-
-.commenter-name {
-    font-weight: bold;
-}
-
-.comment-form {
-    min-width: 500px;
-}
-
-@media (max-width: 767px) {
-    .comment-form {
-        min-width: 260px;
-    }
-    .comment-container {
-        max-width: 280px;
-    }
-}
-
-
-
-/* FOOTER */
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px; /* Set the fixed height of the footer here */
-    line-height: 60px; /* Vertically center the text there */
-    background-color: #fff;
-    margin-top: 10px;
+    color: blue;
 }

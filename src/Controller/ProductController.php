@@ -78,7 +78,7 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/resetdatabase", name="app_cleardb")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function resetDatabase(EntityManagerInterface $entityManager, ProductRepository $productRepository, UserRepository $userRepository){ // Allows me to easily reset the database for testing purposes
         $prodEntities = $productRepository->findAll();

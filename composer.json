@@ -4,6 +4,10 @@
     "require": {
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "composer/package-versions-deprecated": "^1.11",
+        "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
+        "doctrine/orm": "^2.7",
         "google/cloud-firestore": "^1.14",
         "grpc/grpc": "^1.30",
         "kreait/firebase-bundle": "^2.2",
@@ -20,11 +24,10 @@
         "symfony/http-client": "5.0.*",
         "symfony/intl": "5.0.*",
         "symfony/mailer": "5.0.*",
+        "symfony/maker-bundle": "^1.21",
         "symfony/messenger": "5.0.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "5.0.*",
-        "symfony/orm-pack": "*",
-        "symfony/phpunit-bridge": "^5.0",
         "symfony/process": "5.0.*",
         "symfony/security-bundle": "5.0.*",
         "symfony/serializer-pack": "*",
@@ -38,9 +41,13 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^6.3",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "liip/functional-test-bundle": "^4.2",
         "symfony/debug-pack": "*",
-        "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*"
+        "symfony/phpunit-bridge": "^5.1",
+        "symfony/profiler-pack": "*",
+      "ext-http": "*"
     },
     "config": {
         "platform": {
@@ -87,7 +94,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "5.0.*"
         }
     }

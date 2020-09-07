@@ -47,7 +47,7 @@ class User implements UserInterface
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return (string) $this->email;
     }
 
     public function setEmail(string $email): self
@@ -62,7 +62,7 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return (string) $this->username;
     }
@@ -123,7 +123,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 

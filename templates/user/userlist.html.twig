@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
 
     <div class="container">
         <div class="row">
-            <div class="sol-sm-6">
+            <div class="sol-sm-12">
                 <h1>Search for a user</h1>
                 <form action="">
                     <div class="input-group mb-3 mt-3">
@@ -26,12 +29,14 @@
                     <tr>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Message</th>
                     </tr>
                     <tbody>
                     {% for user in users %}
                         <tr>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
+                            <td><button class="btn btn-primary message-btn"> <a class="message-btn" href="{{ path('app_chat_room') }}">Click here to message this user</button></td>
                         </tr>
                     {% endfor %}
                     </tbody>

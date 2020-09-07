@@ -14,7 +14,7 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/user-list", name="app_userlist")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function listUsernames(UserRepository $userRepository, Request $request)
     {

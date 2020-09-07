@@ -37,6 +37,8 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $fireBaseController->addUserToFireBase($user);
+
             $token = new UsernamePasswordToken( // Creating a user token so that we can programatically log them in once they have registered
                 $user,
                 $password,
@@ -46,8 +48,6 @@ class RegistrationController extends AbstractController
 
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
-
-            $fireBaseController->addUserToFireBase($firestore, $user);
 
             return $this->redirectToRoute('app_homepage');
         }

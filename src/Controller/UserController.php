@@ -21,7 +21,7 @@ class UserController extends AbstractController
         $q = $request->query->get('q');
         $users = $userRepository->findAllWithSearch($q);
         return $this->render('user/userlist.html.twig', [
-            'users' =>  $users,
+            'users' => $users
         ]);
     }
 }

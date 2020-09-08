@@ -34,13 +34,13 @@ class FireBaseController extends AbstractController
         return $this->json('Data added to firebase');
     }
 
-    /**
-     * @Route("/test")
-     */
+
+
+
     public function getUsers()
     {
-        $citiesRef = $this->firestore->database()->collection('Users');
-        $documents = $citiesRef->documents();
+        $userRef = $this->firestore->database()->collection('Users');
+        $documents = $userRef->documents();
         foreach ($documents as $document) {
             if ($document->exists()) {
                 $docArray[] = $document->data();
@@ -51,6 +51,26 @@ class FireBaseController extends AbstractController
         }
         return $docArray;
 
+    }
+
+    /**
+     * @Route("/test")
+     */
+    public function getMessages()
+    {
+        $msgRef = $this->firestore->database()->collection('messages');
+        $documents = $msgRef->documents();
+        dd($documents);
+        foreach ($documents as $document) {
+            if ($document->exists()) {
+                $docArray[] = $document->data();
+            } else {
+                return 'Document not found';
+            }
+
+        }
+
+        return $docArray;
     }
 }
 

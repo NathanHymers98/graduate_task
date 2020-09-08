@@ -36,7 +36,10 @@
                         <tr>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
-                            <td><button class="btn btn-primary message-btn"> <a class="message-btn" href="{{ path('app_chat_room') }}">Click here to message this user</button></td>
+                            {% if app.user %}
+                            <td> <a class="message-btn" href="{{ path('app_chat_room', {'user1': app.user.id , 'user2': user.id}) }}">Click here to message this user</a></td>
+{#                                <td><button class="btn btn-primary message-btn"> <a class="message-btn" href="{{ path('app_chat_room')}}">Click here to message this user</button></td>#}
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>

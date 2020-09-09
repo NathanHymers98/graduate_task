@@ -36,42 +36,24 @@ class FireBaseController extends AbstractController
 
 
 
-
-    public function getUsers()
-    {
-        $userRef = $this->firestore->database()->collection('Users');
-        $documents = $userRef->documents();
-        foreach ($documents as $document) {
-            if ($document->exists()) {
-                $docArray[] = $document->data();
-            } else {
-                return 'Document not found';
-            }
-
-        }
-        return $docArray;
-
-    }
-
-    /**
-     * @Route("/test")
-     */
-    public function getMessages()
-    {
-        $msgRef = $this->firestore->database()->collection('messages');
-        $documents = $msgRef->documents();
-        dd($documents);
-        foreach ($documents as $document) {
-            if ($document->exists()) {
-                $docArray[] = $document->data();
-            } else {
-                return 'Document not found';
-            }
-
-        }
-
-        return $docArray;
-    }
+//    /**
+//     * @Route("/test")
+//     */
+//    public function getUsers()
+//    {
+//        $userRef = $this->firestore->database()->collection('Users');
+//        $documents = $userRef->documents();
+//        foreach ($documents as $document) {
+//            if ($document->exists()) {
+//                $docArray[] = $document->data();
+//            } else {
+//                return 'Document not found';
+//            }
+//
+//        }
+//        return $docArray;
+//
+//    }
 }
 
 

@@ -37,8 +37,7 @@
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
                             {% if app.user %}
-                            <td> <a class="message-btn" href="{{ path('app_chat_room', {'user1': app.user.id , 'user2': user.id}) }}">Click here to message this user</a></td>
-{#                                <td><button class="btn btn-primary message-btn"> <a class="message-btn" href="{{ path('app_chat_room')}}">Click here to message this user</button></td>#}
+                            <td> <a class="message-btn" href="{{ path('app_chat_room', {'recipient': user.id}) }}">Click here to message this user</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}

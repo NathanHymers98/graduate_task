@@ -13,9 +13,9 @@ class Message
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
-    private $id;
+    private $chatRoomId;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,10 +37,33 @@ class Message
      */
     private $sentAt;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $seen;
+
+    public function __construct()
     {
-        return $this->id;
+        $this->sentAt = new \DateTime;
+        $this->seen = false;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getChatRoomId()
+    {
+        return $this->chatRoomId;
+    }
+
+    /**
+     * @param mixed $chatRoomId
+     */
+    public function setChatRoomId($chatRoomId): void
+    {
+        $this->chatRoomId = $chatRoomId;
+    }
+
 
     public function getContent(): ?string
     {
@@ -86,6 +109,18 @@ class Message
     public function setSentAt(\DateTimeInterface $sentAt): self
     {
         $this->sentAt = $sentAt;
+
+        return $this;
+    }
+
+    public function getSeen(): ?string
+    {
+        return $this->seen;
+    }
+
+    public function setSeen(string $seen): self
+    {
+        $this->seen = $seen;
 
         return $this;
     }

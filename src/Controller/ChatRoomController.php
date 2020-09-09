@@ -3,46 +3,69 @@
 
 namespace App\Controller;
 
-use App\Entity\Participant;
-use App\Entity\User;
+use App\Entity\Message;
 use App\Form\ChatRoomFormType;
+use App\Service\FireBaseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Kreait\Firebase\Firestore;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 
 class ChatRoomController extends AbstractController
 {
     /**
-     * @Route("/chat_room/{user1}/{user2}", name="app_chat_room")
+     * @Route("/chat_room/{recipient}", name="app_chat_room")
      */
-    public function chatRoom($user1, $user2, Request $request, FireBaseController $fireBaseController, FireStore $firestore)
+    public function chatRoom($recipient, Request $request, FireBaseController $fireBaseController, FireStore $firestore, NormalizerInterface $normalizer, FireBaseService $fireBaseService)
     {
 
-        $users = $fireBaseController->getUsers();
+        $currentUser = $this->getUser();
+        $currUserID = $currentUser->getId();
+        $msg = new Message();
 
-        $form = $this->createForm(ChatRoomFormType::class);
 
-        $chatRoom = 'chat_room'.$user1 . '_' . $user2;
+        $form = $this->createForm(ChatRoomFormType::class, $msg);
+
+
+        if($currUserID < $recipient) {
+            $chatRoom = 'chat_room'. $currUserID . '_' . $recipient;
+        } else {
+            $chatRoom = 'chat_room'. $recipient . '_' . $currUserID;
+        }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->get('message')->getData();
 
-            $firestore->database()->collection('chatroom')->document($chatRoom)->collection('messages')->newDocument()->set(['content' => $message, 'sender_id' => $user1, 'recipient_id' => $user2]);
+            $msg->setSenderId($currUserID);
+            $msg->setRecipientId($recipient);
+            $msg->setContent($message);
+            $msg->setChatRoomId($chatRoom);
+            $msg->setSeen('false');
+            $normalMsg = $normalizer->normalize($msg);
+            $fireBaseService->storeMessage($normalMsg, $chatRoom);
 
-            return $this->redirectToRoute('app_chat_room', ['user1' => $user1, 'user2' => $user2]);
+            return $this->redirectToRoute('app_chat_room', ['recipient' => $recipient]);
         }
 
         return $this->render('chat_room/chat_room.html.twig', [
             'chatroomForm' => $form->createView(),
-            'users' => $users,
         ]);
     }
 
-//    public function displayMessages()
-//    {
-//        $message =
-//    }
+    /**
+     * @Route("/test2")
+     */
+    public function displayMessage(FireStore $firestore, FireBaseController $fireBaseController)
+    {
+        $messages = $fireBaseController->getMessages();
+
+        dd($messages);
+
+        return $this->render('chat_room/chat_room.html.twig', [
+            'messages' => $messages,
+            ]);
+    }
 }

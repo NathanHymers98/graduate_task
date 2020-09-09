@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Participant;
+use App\Entity\Message;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ class ChatRoomFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Participant::class,
+            'data_class' => Message::class,
         ]);
     }
 }

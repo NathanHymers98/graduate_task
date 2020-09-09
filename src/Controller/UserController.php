@@ -24,4 +24,9 @@ class UserController extends AbstractController
             'users' => $users
         ]);
     }
+
+    public function getUser()
+    {
+
+    }
 }

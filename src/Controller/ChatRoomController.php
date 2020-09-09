@@ -18,7 +18,7 @@ class ChatRoomController extends AbstractController
     /**
      * @Route("/chat_room/{recipient}", name="app_chat_room")
      */
-    public function chatRoom($recipient, Request $request, FireBaseController $fireBaseController, FireStore $firestore, NormalizerInterface $normalizer, FireBaseService $fireBaseService)
+    public function chatRoom($recipient, Request $request, FireStore $firestore, NormalizerInterface $normalizer, FireBaseService $fireBaseService)
     {
 
         $currentUser = $this->getUser();
@@ -39,13 +39,10 @@ class ChatRoomController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->get('message')->getData();
 
-            $msg->setSenderId($currUserID);
-            $msg->setRecipientId($recipient);
-            $msg->setContent($message);
-            $msg->setChatRoomId($chatRoom);
-            $msg->setSeen('false');
             $normalMsg = $normalizer->normalize($msg);
-            $fireBaseService->storeMessage($normalMsg, $chatRoom);
+            $fireBaseService->storeMessage($message, $chatRoom, $currUserID, $recipient);
+//            $yes = $fireBaseService->displayMessages($chatRoom);
+//            dd($yes);
 
             return $this->redirectToRoute('app_chat_room', ['recipient' => $recipient]);
         }
@@ -53,19 +50,5 @@ class ChatRoomController extends AbstractController
         return $this->render('chat_room/chat_room.html.twig', [
             'chatroomForm' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/test2")
-     */
-    public function displayMessage(FireStore $firestore, FireBaseController $fireBaseController)
-    {
-        $messages = $fireBaseController->getMessages();
-
-        dd($messages);
-
-        return $this->render('chat_room/chat_room.html.twig', [
-            'messages' => $messages,
-            ]);
     }
 }

@@ -15,6 +15,7 @@ class ChatRoomFormType extends AbstractType
         $builder
             ->add('message', TextType::class, [
                 'mapped' => false,
+                'label' => false,
             ])
         ;
     }

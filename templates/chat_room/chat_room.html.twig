@@ -6,15 +6,19 @@
 {#        {{ user.username }}#}
 {#    {% endfor %}#}
 
-    {{ form_start(chatroomForm) }}
-
-    <h1 class="h3 mb-3 font-weight-normal">Send a message</h1>
-    {{ form_row(chatroomForm.message) }}
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Send message
-    </button>
-    {{ form_end(chatroomForm) }}
-
+    <div class="container">
+        <div class="message-form">
+            {{ form_start(chatroomForm, {
+                'attr': {class: 'form-message'}
+            }) }}
+            <h1 class="h3 mb-3 font-weight-normal">Send a message</h1>
+                {{ form_row(chatroomForm.message) }}
+            <button class="btn btn-lg btn-primary btn-block message-send" type="submit">
+                Send message
+            </button>
+            {{ form_end(chatroomForm) }}
+        </div>
+    </div>
 {#    {% for message in messages %}#}
 {#        {{ message.content }}#}
 {#    {% endfor %}#}

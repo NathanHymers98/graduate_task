@@ -106,3 +106,16 @@ button.btn.btn-primary {
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
     color: blue;
 }
+
+/* MESSAGES */
+
+form.form-message {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+button.message-send {
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}

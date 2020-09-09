@@ -44,6 +44,7 @@ class Message
 
     public function __construct()
     {
+        date_default_timezone_set('Europe/London');
         $this->sentAt = new \DateTime;
         $this->seen = false;
     }

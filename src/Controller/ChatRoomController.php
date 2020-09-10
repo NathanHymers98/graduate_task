@@ -41,8 +41,8 @@ class ChatRoomController extends AbstractController
 
             $normalMsg = $normalizer->normalize($msg);
             $fireBaseService->storeMessage($message, $chatRoom, $currUserID, $recipient);
-//            $yes = $fireBaseService->displayMessages($chatRoom);
-//            dd($yes);
+            $fireBaseService->displayMessages($chatRoom);
+
 
             return $this->redirectToRoute('app_chat_room', ['recipient' => $recipient]);
         }

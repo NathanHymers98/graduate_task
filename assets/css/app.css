@@ -16,7 +16,7 @@ button.btn.btn-primary.message-btn {
 /* NAVIGATION */
 
 .navbar{
-    background-color: #718C00!important;
+    background-color: #2ca02c!important;
 }
 
 /* UPLOAD FORM */
@@ -38,9 +38,13 @@ table.table {
     color: #1d2124;
 }
 
-a.message-btn {
+button.btn.message-btn {
     color: white;
 }
+
+/*a.message-btn-text {*/
+/*    ;*/
+/*}*/
 
 /* LOGIN */
 

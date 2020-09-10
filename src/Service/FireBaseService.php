@@ -13,6 +13,8 @@ class FireBaseService
 
     private $normalizer;
 
+    private $docArray;
+
 
     public function __construct(Firestore $firestore, NormalizerInterface $normalizer)
     {
@@ -41,13 +43,12 @@ class FireBaseService
         //$snapshot = $usersRef->snapshot();
         foreach ($documents as $document) {
             if ($document->exists()) {
-                printf('Document data for document %s:' . PHP_EOL, $document->id());
-                print_r($document->data());
-                printf(PHP_EOL);
-                dump($document);
+                $docArray[] = $document->data();
             } else {
                 printf('Document %s does not exist!' . PHP_EOL);
             }
         }
+        dd($docArray);
+        return $docArray;
     }
 }

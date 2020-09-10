@@ -18,7 +18,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, FireStore $firestore, FireBaseController $fireBaseController): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, FireStore $firestore): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -36,8 +36,6 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
-            $fireBaseController->addUserToFireBase($user);
 
             $token = new UsernamePasswordToken( // Creating a user token so that we can programatically log them in once they have registered
                 $user,

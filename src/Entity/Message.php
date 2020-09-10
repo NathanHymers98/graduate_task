@@ -78,24 +78,24 @@ class Message
         return $this;
     }
 
-    public function getSenderId(): ?int
+    public function getSenderId()
     {
         return $this->senderId;
     }
 
-    public function setSenderId(int $senderId): self
+    public function setSenderId($senderId): self
     {
         $this->senderId = $senderId;
 
         return $this;
     }
 
-    public function getRecipientId(): ?int
+    public function getRecipientId()
     {
         return $this->recipientId;
     }
 
-    public function setRecipientId(int $recipientId): self
+    public function setRecipientId($recipientId): self
     {
         $this->recipientId = $recipientId;
 

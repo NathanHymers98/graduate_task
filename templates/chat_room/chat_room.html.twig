@@ -12,6 +12,15 @@
                 'attr': {class: 'form-message'}
             }) }}
             <h1 class="h3 mb-3 font-weight-normal">Send a message</h1>
+            {% for message in messages %}
+                {% if message.senderId == app.user %}
+                    <p align="right">
+                        {% endif %}
+                        {{ message.senderId.username }}:
+                        {{ message.content }} <br/>
+                sent: {{ message.sentAt|date('d-m-Y H:s') }}
+                </p>
+            {% endfor %}
                 {{ form_row(chatroomForm.message) }}
             <button class="btn btn-lg btn-success btn-block message-send" type="submit">
                 Send message
@@ -19,7 +28,5 @@
             {{ form_end(chatroomForm) }}
         </div>
     </div>
-{#    {% for message in messages %}#}
-{#        {{ message.content }}#}
-{#    {% endfor %}#}
+
 {% endblock %}

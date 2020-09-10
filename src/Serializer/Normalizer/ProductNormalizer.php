@@ -35,7 +35,7 @@ class ProductNormalizer implements DenormalizerInterface, CacheableSupportsMetho
             $data['Discontinued'] = '';
         }
 
-        $product = new Product(); // Creating new Product objects with the data that was passed form the serializer
+        $product = new Product(); // Creating new Product objects with the data that was passed from the serializer
             $product->setProductCode($data['Product Code']);
             $product->setProductName($data['Product Name']);
             $product->setProductDescription($data['Product Description']);

@@ -13,13 +13,23 @@ class FireBaseService
 
     private $normalizer;
 
-    private $docArray;
+    private $messages;
 
 
     public function __construct(Firestore $firestore, NormalizerInterface $normalizer)
     {
         $this->firestore = $firestore;
         $this->normalizer = $normalizer;
+    }
+
+    public function getChatRoomId($senderId, $recipientId)
+    {
+        if($senderId < $recipientId) {
+            $chatRoom = 'chat_room'. $senderId . '_' . $recipientId;
+        } else {
+            $chatRoom = 'chat_room'. $recipientId . '_' . $senderId;
+        }
+        return $chatRoom;
     }
 
     public function storeMessage($message, $chatRoom, $senderId, $recipientId)
@@ -39,16 +49,18 @@ class FireBaseService
     public function displayMessages($chatroom)
     {
         $messagesRef = $this->firestore->database()->collection('chatroom')->document($chatroom)->collection('messages');
-        $documents = $messagesRef->documents();
-        //$snapshot = $usersRef->snapshot();
+        $documents = $messagesRef->orderBy('sentAt', 'asc')->documents();
         foreach ($documents as $document) {
             if ($document->exists()) {
-                $docArray[] = $document->data();
+                $message = $document->data();
+                 $messages[] = $this->normalizer->denormalize($message, Message::class);
             } else {
                 printf('Document %s does not exist!' . PHP_EOL);
             }
         }
-        dd($docArray);
-        return $docArray;
+        if (empty($messages)) {
+            return 'Message this user';
+        }
+        return $messages;
     }
 }

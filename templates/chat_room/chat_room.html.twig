@@ -1,32 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{#    {% for user in users %}#}
-{#        {{ user.uid }}#}
-{#        {{ user.username }}#}
-{#    {% endfor %}#}
-
+    {{ parent() }}
+    <body class="message-page">
     <div class="container">
-        <div class="message-form">
+        <div id="msg-form" class="message-form">
             {{ form_start(chatroomForm, {
                 'attr': {class: 'form-message'}
             }) }}
-            <h1 class="h3 mb-3 font-weight-normal">Send a message</h1>
+
+            <h1 class="h3 mb-3 font-weight-normal msg-head">Send a message</h1>
             {% for message in messages %}
                 {% if message.senderId == app.user %}
-                    <p align="right">
+                    <p class="user-name" align="right">{{ message.senderId.username }}</p>
+                    <p class="sent-messages" align="right">
+                    {% else %}
+                        <p class="user-name" align="left">{{ message.senderId.username }}</p>
+                        <p class="received-messages" align="left">
                         {% endif %}
-                        {{ message.senderId.username }}:
-                        {{ message.content }} <br/>
-                sent: {{ message.sentAt|date('d-m-Y H:s') }}
+                {{ message.content }}
                 </p>
+                </p>
+                {% if message.senderId == app.user %}
+                    <p class="message-status" align="right">
+                {% else %}
+                    <p class="message-status" align="left">
+                {% endif %}
+                sent: {{ message.sentAt|date('D H:i') }}
+                status: {{ message.seen }}
+                </p>
+                </p>
+
             {% endfor %}
-                {{ form_row(chatroomForm.message) }}
-            <button class="btn btn-lg btn-success btn-block message-send" type="submit">
-                Send message
+
+                {{ form_row(chatroomForm.message, {
+                    'attr': {placeholder: 'Send a message...'}
+                }) }}
+            <button id="submit_form" class="btn-block message-send btn-hover" type="submit">
+
+                <span>Send Message</span>
+                <i class="fas fa-paper-plane"></i>
             </button>
             {{ form_end(chatroomForm) }}
         </div>
     </div>
-
+    </body>
 {% endblock %}

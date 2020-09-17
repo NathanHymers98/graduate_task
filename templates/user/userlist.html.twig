@@ -25,27 +25,29 @@
                 </form>
 
                 <h1>List of Users</h1>
-                <table class="table table-striped table-bordered">
+                <table class="table table-bordered">
                     <tr>
+
                         <th>Username</th>
                         <th>Email</th>
                         <th>Message</th>
                     </tr>
                     <tbody>
-                    {% for user in users %}
-                        <tr>
+                        {% for user in users %}
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
+
                             {% if app.user %}
                                 <td> <a class="message-btn-text" href="{{ path('app_chat_room', {'recipient': user.id}) }}"><button class="btn btn-success message-btn">Click here to message this user</button></a></td>
                             {% endif %}
-                        </tr>
+                            </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 
 {% endblock %}
 

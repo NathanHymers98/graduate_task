@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Entity\User;
 use Kreait\Firebase\Firestore;
 use App\Entity\Message;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -39,28 +40,67 @@ class FireBaseService
         $msg->setRecipientId($recipientId);
         $msg->setContent($message);
         $msg->setChatRoomId($chatRoom);
-        $msg->setSeen('false');
         $normalMsg = $this->normalizer->normalize($msg);
 
-
-        $this->firestore->database()->collection('chatroom')->document($chatRoom)->collection('messages')->newDocument()->set($normalMsg);
+        $this->firestore->database()
+            ->collection('chatroom')
+            ->document($chatRoom)
+            ->collection('messages')
+            ->newDocument()
+            ->set($normalMsg);
     }
 
-    public function displayMessages($chatroom)
+
+    public function updateSeen($chatRoom, $senderId)
     {
-        $messagesRef = $this->firestore->database()->collection('chatroom')->document($chatroom)->collection('messages');
+
+        $messagesRef = $this->firestore->database()->collection('chatroom')->document($chatRoom)->collection('messages');
+        $q = $messagesRef
+            ->where('seen', '=', 'Delivered')
+            ->where('recipientId', '=', $senderId);
+        $documents = $q->documents();
+
+        foreach ($documents as $document) {
+            if ($document->exists()) {
+                $document->reference()->update([['path' => 'seen', 'value' => 'Read']]);
+           }
+        }
+
+    }
+
+    public function displayMessages($chatRoom)
+    {
+        $messagesRef = $this->firestore->database()->collection('chatroom')->document($chatRoom)->collection('messages');
         $documents = $messagesRef->orderBy('sentAt', 'asc')->documents();
         foreach ($documents as $document) {
             if ($document->exists()) {
                 $message = $document->data();
-                 $messages[] = $this->normalizer->denormalize($message, Message::class);
+                $messages[] = $this->normalizer->denormalize($message, Message::class);
             } else {
                 printf('Document %s does not exist!' . PHP_EOL);
             }
         }
-        if (empty($messages)) {
-            return 'Message this user';
+
+        if (!$messagesRef->documents()->isEmpty()) {
+            return $messages;
+        } else {
+            $messages[] = [
+                'username' => 'System',
+                'content' => 'Send this user a message',
+                'senderId' => new User(),
+                'sentAt' => new \DateTime,
+                'seen' => 'true',
+            ];
         }
         return $messages;
+    }
+
+    public function unreadMessageCount($chatRoom, $messages)
+    {
+        $colRef = $this->firestore->database()->collection('chatroom')->document($chatRoom)->collection('messages');
+        for ($i = 0; $i < $messages; $i++) {
+            $doc = $colRef->document($i);
+            $doc->set(['Cnt' => 0]);
+        }
     }
 }

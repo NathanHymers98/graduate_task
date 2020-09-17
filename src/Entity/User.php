@@ -45,6 +45,11 @@ class User implements UserInterface
         return $this->id;
     }
 
+    public function __construct()
+    {
+        $this->hasUnreadMessages = false;
+    }
+
     public function getEmail(): ?string
     {
         return (string) $this->email;
@@ -129,4 +134,6 @@ class User implements UserInterface
 
         return $this;
     }
+
+
 }

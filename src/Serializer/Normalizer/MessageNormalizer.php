@@ -32,7 +32,6 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
     {
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        //$data['senderId'] = ['senderId']['id'];
 
         return $data;
     }
@@ -52,12 +51,16 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
      */
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
+        // Allows me to set the senderId and recipientId of a Message object to the specific User object.
         $sender = $this->entityManager->getRepository(User::class)->find(['id' => $data['senderId']]);
         $recipient = $this->entityManager->getRepository(User::class)->find(['id' => $data['recipientId']]);
 
-//        dd($recipient, $sender);
-
         $message = $this->normalizer->denormalize($data, $type, $format, $context);
+
+
+//        if($recipient !== $sender) {
+//            $recipient->setHasUnreadMessages($sender);
+//        }
 
         $message->setSenderId($sender);
         $message->setRecipientId($recipient);

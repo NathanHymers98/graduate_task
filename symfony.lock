@@ -299,6 +299,9 @@
     "rize/uri-template": {
         "version": "0.3.2"
     },
+    "scienta/doctrine-json-functions": {
+        "version": "4.1.2"
+    },
     "sebastian/cli-parser": {
         "version": "1.0.0"
     },

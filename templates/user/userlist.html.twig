@@ -27,17 +27,22 @@
                 <h1>List of Users</h1>
                 <table class="table table-bordered">
                     <tr>
-
+                        <th>Contact No.</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Message</th>
                     </tr>
                     <tbody>
                         {% for user in users %}
+                            {% for usermsg in app.user.hasUnreadMessagesFrom  %}
+                                {% if app.user.id != usermsg and user.id == usermsg %}
+                                    <tr class="unread-msg">
+                                {% endif %}
+                            {% endfor %}
+                        {% if app.user != user%}
+                            <td>{{ user.id }}</td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
-
-                            {% if app.user %}
                                 <td> <a class="message-btn-text" href="{{ path('app_chat_room', {'recipient': user.id}) }}"><button class="btn btn-success message-btn">Click here to message this user</button></a></td>
                             {% endif %}
                             </tr>

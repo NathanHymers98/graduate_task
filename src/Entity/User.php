@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -39,6 +40,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=100)
      */
     private $username;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $hasUnreadMessagesFrom = [];
 
     public function getId(): ?int
     {
@@ -133,6 +139,28 @@ class User implements UserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    public function setHasUnreadMessagesFrom($hasUnreadMessagesFrom): self
+    {
+        $this->hasUnreadMessagesFrom[] = $hasUnreadMessagesFrom;
+
+        return $this;
+    }
+
+    public function getHasUnreadMessagesFrom(): ?array
+    {
+        return $this->hasUnreadMessagesFrom;
+    }
+
+    public function removeReadMessages($sender)
+    {
+        // Loops over the unread messages array keys, if the sender is equal to the value of the key, then it will be removed from the array
+        foreach ($this->hasUnreadMessagesFrom as $key => $object) {
+            if ($object == $sender) {
+                unset($this->hasUnreadMessagesFrom[$key]);
+            }
+        }
     }
 
 

@@ -21,11 +21,11 @@ $('.custom-file-input').on('change', function(event) {
         .html(inputFileSystem.files[0].name)
 });
 
-// $(document).ready(function(){
-//     setInterval(function(){
-//         $("#msg-form").load(window.location.href + " #msg-form" );
-//     }, 10000);
-// });
+$(document).ready(function(){
+    setInterval(function(){
+        $("#msg-form").load(window.location.href + " #msg-form" );
+    }, 10000);
+});
 
 
 // import * as firebase from 'firebase/app';

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -59,9 +60,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('id', $id)
             ->getQuery();
         return $qb->getResult();
-
-
     }
+
+//    public function findAllUsersWithUnreadMessages($senderId)
+//    {
+//        $qb = $this->createQueryBuilder('u');
+//        $qb
+//            ->select('u.hasUnreadMessagesFrom')
+//            ->andWhere('u.hasUnreadMessagesFrom LIKE :term')
+//            ->setParameter('term', '%' . $senderId . '%');
+//         return $qb->getQuery()
+//            ->getResult();
+//
+//    }
 
     // /**
     //  * @return User[] Returns an array of User objects

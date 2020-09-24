@@ -42,10 +42,18 @@ class Message
      */
     private $seen;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $emailSent;
+
     public function __construct()
     {
         date_default_timezone_set('Europe/London');
-        $this->sentAt = new \DateTime;
+        $timeobj = new \DateTime();
+        $time = $timeobj->format('D H:i');
+        $this->setEmailSent('false');
+        $this->sentAt = $time;
         $this->seen = 'Delivered';
     }
 
@@ -102,7 +110,7 @@ class Message
         return $this;
     }
 
-    public function getSentAt(): ?\DateTimeInterface
+    public function getSentAt()
     {
         return $this->sentAt;
     }
@@ -122,6 +130,18 @@ class Message
     public function setSeen(string $seen): self
     {
         $this->seen = $seen;
+
+        return $this;
+    }
+
+    public function getEmailSent(): ?string
+    {
+        return $this->emailSent;
+    }
+
+    public function setEmailSent(string $emailSent): self
+    {
+        $this->emailSent = $emailSent;
 
         return $this;
     }

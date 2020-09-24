@@ -57,13 +57,19 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
 
         $message = $this->normalizer->denormalize($data, $type, $format, $context);
 
-
-//        if($recipient !== $sender) {
-//            $recipient->setHasUnreadMessages($sender);
-//        }
-
         $message->setSenderId($sender);
         $message->setRecipientId($recipient);
+
+        // if the recipient and sender are different objects and the messages seen property is set to delivered
+        // Check to make sure that the sender is not in the recipients hasUnreadMessagesFrom array property
+        // If the sender is not in there already, then add them to that array.
+        if($recipient !== $sender && $message->getSeen() == 'Delivered') {
+            if(!in_array($sender->getId(), $recipient->getHasUnreadMessagesFrom())) {
+                $recipient->setHasUnreadMessagesFrom($sender->getId());
+            }
+        }
+        $this->entityManager->persist($recipient);
+        $this->entityManager->flush();
 
         return $message;
     }

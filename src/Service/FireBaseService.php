@@ -110,7 +110,7 @@ class FireBaseService
        // Creating two datetime objects, one with the current time and another which behind by 15 minutes
        $currentTime = new \DateTime();
        $timeIn15Minutes = new \DateTime();
-       $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT1M'));
+       $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT15M'));
        $newTime = $timeIn15Minutes->format('D H:i');
 
        $timeDifference = $timeIn15Minutes->diff($currentTime);

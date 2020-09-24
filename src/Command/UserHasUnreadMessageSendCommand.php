@@ -2,8 +2,11 @@
 
 namespace App\Command;
 
+use App\Entity\Message;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\FireBaseService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,6 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Routing\RouterInterface;
 
 class UserHasUnreadMessageSendCommand extends Command
 {
@@ -28,13 +32,23 @@ class UserHasUnreadMessageSendCommand extends Command
      * @var MailerInterface
      */
     private $mailer;
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
 
-    public function __construct(UserRepository $userRepository, FireBaseService $fireBaseService, MailerInterface $mailer)
+    public function __construct(UserRepository $userRepository, FireBaseService $fireBaseService, MailerInterface $mailer, RouterInterface $router, EntityManagerInterface $entityManager)
     {
         parent::__construct(null);
         $this->userRepository = $userRepository;
         $this->fireBaseService = $fireBaseService;
         $this->mailer = $mailer;
+        $this->router = $router;
+        $this->entityManager = $entityManager;
     }
 
 
@@ -49,29 +63,48 @@ class UserHasUnreadMessageSendCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $unreadMessages = $this->fireBaseService->getUnreadMessages();
 
-//        dd($messages);
+
+        $unreadMessages = $this->fireBaseService->getUnreadMessages();
 
         // Looping over the unread messages and sending an email to the email attached to the recipient of the message
         $io->progressStart(count($unreadMessages));
+
+
         foreach ($unreadMessages as $unreadMessage) {
-            if ($unreadMessage) {
-                $email = (new TemplatedEmail())
-                    ->from(new Address('gradtask@wren.com', 'gradtask'))
-                    ->to($unreadMessage->getRecipientId()->getEmail())
-                    ->subject('You have an unread message!')
-                    ->html('Yes');
 
-                $this->mailer->send($email);
+            $recipient = $this->entityManager->getRepository(User::class)->find(['id' => $unreadMessage['recipientId']]);
 
-                $io->progressAdvance();
-            }
+           $groupedMessage = $this->groupUnreadMessages($unreadMessages);
+
+           if ($groupedMessage) {
+               $email = (new TemplatedEmail())
+                   ->from(new Address('gradtask@wren.com', 'gradtask'))
+                   ->to($recipient->getEmail())
+                   ->subject('You have an unread message!')
+                   ->htmlTemplate('email/unread_messages_email.html.twig');
+
+               $this->mailer->send($email);
+
+               $io->progressAdvance();
+           }
+
         }
         $io->progressFinish();
 
         $io->success('Emails were sent to users');
 
         return 0;
+    }
+
+    public function groupUnreadMessages($unreadMessages)
+    {
+        $groupedMessages = [];
+
+        foreach($unreadMessages as $message)
+        {
+            $groupedMessages[$message['recipientId']][] = $message;
+        }
+        return $groupedMessages;
     }
 }

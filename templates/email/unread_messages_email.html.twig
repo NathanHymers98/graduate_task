@@ -1,0 +1,25 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+    {% block navbar %}{% endblock %}
+<div class="container">
+    <div class="row">
+        <table align="center" border="1" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+                <td>
+                    <img id="wren-logo" src="{{ absolute_url(asset('build/images/wren.png')) }}" alt="Wren Logo" width="100%" height="50%" style="align-content: center"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>You have a new message!</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a align="center" href="{{ url('app_userlist') }}"> <button class="btn btn-primary">Click here to go to your contacts</button> </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

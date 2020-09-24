@@ -110,7 +110,7 @@ class FireBaseService
        // Creating two datetime objects, one with the current time and another which behind by 15 minutes
        $currentTime = new \DateTime();
        $timeIn15Minutes = new \DateTime();
-       $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT5M'));
+       $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT1M'));
        $newTime = $timeIn15Minutes->format('D H:i');
 
        $timeDifference = $timeIn15Minutes->diff($currentTime);
@@ -131,13 +131,11 @@ class FireBaseService
                    ->rows();
 
                foreach ($messages as $message) {
-                   $unreadMessages = $message->data();
-                   $unreadMessagesArr[] = $this->normalizer->denormalize($unreadMessages, Message::class);
-
-                   $message->reference()->update([['path' => 'emailSent', 'value' => 'True']]);
+                   $unreadMessagesArr[] = $message->data();
+//                   $unreadMessagesArr[] = $this->normalizer->denormalize($unreadMessages, Message::class);
+                   $message->reference()->update([['path' => 'emailSent', 'value' => 'true']]);
                }
            }
-
        }
        return $unreadMessagesArr;
     }

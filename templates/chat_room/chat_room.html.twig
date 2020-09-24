@@ -13,14 +13,14 @@
             {% for message in messages %}
                 {% if message.senderId == app.user %}
                     <p class="user-name" align="right">{{ message.senderId.username }}</p>
-                    <p class="sent-messages" align="right">
+                    <p class="sent-messages" align="right">{{ message.content }}</p>
                     {% else %}
                         <p class="user-name" align="left">{{ message.senderId.username }}</p>
-                        <p class="received-messages" align="left">
+                        <p class="received-messages" align="left">{{ message.content }}</p>
                         {% endif %}
-                {{ message.content }}
-                </p>
-                </p>
+{#                {{ message.content }}#}
+
+
                 {% if message.senderId == app.user %}
                     <p class="message-status" align="right">
                 {% else %}

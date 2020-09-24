@@ -8,7 +8,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="sol-sm-12">
+            <div class="sol-sm-12 user-table">
                 <h1>Search for a user</h1>
                 <form action="">
                     <div class="input-group mb-3 mt-3">
@@ -27,7 +27,6 @@
                 <h1>List of Users</h1>
                 <table class="table table-bordered">
                     <tr>
-                        <th>Contact No.</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Message</th>
@@ -36,11 +35,10 @@
                         {% for user in users %}
                             {% for usermsg in app.user.hasUnreadMessagesFrom  %}
                                 {% if app.user.id != usermsg and user.id == usermsg %}
-                                    <tr class="unread-msg">
+                                    <tr class="unread-msg-alert">
                                 {% endif %}
                             {% endfor %}
-                        {% if app.user != user%}
-                            <td>{{ user.id }}</td>
+                        {% if app.user != user %}
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
                                 <td> <a class="message-btn-text" href="{{ path('app_chat_room', {'recipient': user.id}) }}"><button class="btn btn-success message-btn">Click here to message this user</button></a></td>

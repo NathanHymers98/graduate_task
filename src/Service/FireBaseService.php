@@ -76,7 +76,7 @@ class FireBaseService
 
     }
 
-    public function displayMessages($chatRoom)
+    public function getMessages($chatRoom)
     {
         // Getting all the messages that are stored in FB and ordering them by the date that they were sent at.
         $messagesRef = $this->firestore->database()->collection('chatroom')->document($chatRoom)->collection('messages');
@@ -146,7 +146,7 @@ class FireBaseService
 
     public function updateUnreadMessages($chatRoom, UserInterface $currentUser)
     {
-        $userMessages = $this->displayMessages($chatRoom);
+        $userMessages = $this->getMessages($chatRoom);
         $msg = new Message();
 
         foreach($userMessages as $item) {

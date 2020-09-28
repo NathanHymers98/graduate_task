@@ -63,19 +63,12 @@ class UserHasUnreadMessageSendCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-
-
-
         $unreadMessages = $this->fireBaseService->getUnreadMessages();
 
         // Looping over the unread messages and sending an email to the email attached to the recipient of the message
         $io->progressStart(count($unreadMessages));
-
-
         foreach ($unreadMessages as $unreadMessage) {
-
             $recipient = $this->entityManager->getRepository(User::class)->find(['id' => $unreadMessage['recipientId']]);
-
            $groupedMessage = $this->groupUnreadMessages($unreadMessages);
 
            if ($groupedMessage) {
@@ -86,13 +79,11 @@ class UserHasUnreadMessageSendCommand extends Command
                    ->htmlTemplate('email/unread_messages_email.html.twig');
 
                $this->mailer->send($email);
-
                $io->progressAdvance();
            }
 
         }
         $io->progressFinish();
-
         $io->success('Emails were sent to users');
 
         return 0;
@@ -101,7 +92,6 @@ class UserHasUnreadMessageSendCommand extends Command
     public function groupUnreadMessages($unreadMessages)
     {
         $groupedMessages = [];
-
         foreach($unreadMessages as $message)
         {
             $groupedMessages[$message['recipientId']][] = $message;

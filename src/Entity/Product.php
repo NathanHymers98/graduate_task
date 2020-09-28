@@ -163,7 +163,7 @@ class Product
         return $this->productStock;
     }
 
-    public function setProductStock(int $productStock): ?self
+    public function setProductStock($productStock): ?self
     {
         $this->productStock = $productStock;
 
@@ -175,7 +175,7 @@ class Product
         return $this->netCost;
     }
 
-    public function setNetCost(float $netCost): self
+    public function setNetCost($netCost): self
     {
         $this->netCost = $netCost;
 

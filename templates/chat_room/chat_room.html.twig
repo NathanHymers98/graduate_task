@@ -8,8 +8,7 @@
             {{ form_start(chatroomForm, {
                 'attr': {class: 'form-message'}
             }) }}
-
-            <h1 class="h3 mb-3 font-weight-normal msg-head">Send a message</h1>
+            <div class="h3 mb-3 font-weight-normal msg-head">Send a message</div>
             {% for message in messages %}
                 {% if message.senderId == app.user %}
                     <p class="user-name" align="right">{{ message.senderId.username }}</p>
@@ -18,8 +17,6 @@
                         <p class="user-name" align="left">{{ message.senderId.username }}</p>
                         <p class="received-messages" align="left">{{ message.content }}</p>
                         {% endif %}
-{#                {{ message.content }}#}
-
 
                 {% if message.senderId == app.user %}
                     <p class="message-status" align="right">
@@ -30,18 +27,18 @@
                 status: {{ message.seen }}
                 </p>
                 </p>
-
             {% endfor %}
 
+            <div class="message-form-input">
                 {{ form_row(chatroomForm.message, {
-                    'attr': {placeholder: 'Send a message...'}
+                    'attr': {placeholder: 'Type your message...', class: 'msg-type'}
                 }) }}
             <button id="submit_form" class="btn-block message-send btn-hover" type="submit">
-
                 <span>Send Message</span>
                 <i class="fas fa-paper-plane"></i>
             </button>
             {{ form_end(chatroomForm) }}
+            </div>
         </div>
     </div>
     </body>

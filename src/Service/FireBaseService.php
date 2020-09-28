@@ -1,11 +1,13 @@
 <?php
-
+declare(strict_types=1);
 
 namespace App\Service;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Kreait\Firebase\Firestore;
 use App\Entity\Message;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class FireBaseService
@@ -14,28 +16,31 @@ class FireBaseService
 
     private $normalizer;
 
+    private $entityManager;
 
-    public function __construct(Firestore $firestore, NormalizerInterface $normalizer)
+
+    public function __construct(Firestore $firestore, NormalizerInterface $normalizer, EntityManagerInterface $entityManager)
     {
         $this->firestore = $firestore;
         $this->normalizer = $normalizer;
+        $this->entityManager = $entityManager;
     }
 
-    public function getChatRoomId($senderId, $recipientId)
+    public function getChatRoomId(UserInterface $sender,  User $recipient)
     {
-        if($senderId < $recipientId) {
-            $chatRoom = 'chat_room'. $senderId . '_' . $recipientId;
+        if($sender->getId() < $recipient->getId()) {
+            $chatRoom = 'chat_room'. $sender->getId() . '_' . $recipient->getId();
         } else {
-            $chatRoom = 'chat_room'. $recipientId . '_' . $senderId;
+            $chatRoom = 'chat_room'. $recipient->getId() . '_' . $sender->getId();
         }
         return $chatRoom;
     }
 
-    public function storeMessage($message, $chatRoom, $senderId, $recipientId)
+    public function storeMessage($message, $chatRoom, UserInterface $sender, User $recipient)
     {
         $msg = new Message();
-        $msg->setSenderId($senderId);
-        $msg->setRecipientId($recipientId);
+        $msg->setSenderId($sender->getId());
+        $msg->setRecipientId($recipient->getId());
         $msg->setContent($message);
         $msg->setChatRoomId($chatRoom);
         $normalMsg = $this->normalizer->normalize($msg);
@@ -52,7 +57,7 @@ class FireBaseService
     }
 
 
-    public function updateSeen($chatRoom, $senderId)
+    public function updateSeen($chatRoom, UserInterface $sender)
     {
         // Querying FB for any messages documents that meet the two query requirements.
         // I giving this method an argument of $senderId because if the recipient of a message is the sender ID that I give it
@@ -60,7 +65,7 @@ class FireBaseService
         $messagesRef = $this->firestore->database()->collection('chatroom')->document($chatRoom)->collection('messages');
         $q = $messagesRef
             ->where('seen', '=', 'Delivered')
-            ->where('recipientId', '=', $senderId);
+            ->where('recipientId', '=', $sender->getId());
         $documents = $q->documents();
 
         foreach ($documents as $document) {
@@ -132,11 +137,29 @@ class FireBaseService
 
                foreach ($messages as $message) {
                    $unreadMessagesArr[] = $message->data();
-//                   $unreadMessagesArr[] = $this->normalizer->denormalize($unreadMessages, Message::class);
                    $message->reference()->update([['path' => 'emailSent', 'value' => 'true']]);
                }
            }
        }
        return $unreadMessagesArr;
+    }
+
+    public function updateUnreadMessages($chatRoom, UserInterface $currentUser)
+    {
+        $userMessages = $this->displayMessages($chatRoom);
+        $msg = new Message();
+
+        foreach($userMessages as $item) {
+            if($item instanceof $msg) {
+                if($currentUser === $item->getRecipientId()) {
+                    $currentUser->removeReadMessages($item->getSenderId()->getId());
+
+                    $this->entityManager->persist($item->getSenderId());
+                    $this->entityManager->flush();
+
+                    $this->updateSeen($chatRoom, $currentUser);
+                }
+            }
+        }
     }
 }

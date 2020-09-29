@@ -64,18 +64,19 @@ class UserHasUnreadMessageSendCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $unreadMessages = $this->fireBaseService->getUnreadMessages();
+        $groupedMessages = $this->groupUnreadMessages($unreadMessages);
 
         // Looping over the unread messages and sending an email to the email attached to the recipient of the message
-        $io->progressStart(count($unreadMessages));
-        foreach ($unreadMessages as $unreadMessage) {
-            $recipient = $this->entityManager->getRepository(User::class)->find(['id' => $unreadMessage['recipientId']]);
-           $groupedMessage = $this->groupUnreadMessages($unreadMessages);
+        $io->progressStart(count($groupedMessages));
+        foreach ($groupedMessages as $groupedMessage) {
+            $recipient = $this->entityManager->getRepository(User::class)->find(['id' => $groupedMessage['recipientId']]);
 
-           if ($groupedMessage) {
+
+           if (!empty($groupedMessages)) {
                $email = (new TemplatedEmail())
                    ->from(new Address('gradtask@wren.com', 'gradtask'))
                    ->to($recipient->getEmail())
-                   ->subject('You have an unread message!')
+                   ->subject('You have unread messages!')
                    ->htmlTemplate('email/unread_messages_email.html.twig');
 
                $this->mailer->send($email);
@@ -91,10 +92,9 @@ class UserHasUnreadMessageSendCommand extends Command
 
     public function groupUnreadMessages($unreadMessages)
     {
-        $groupedMessages = [];
         foreach($unreadMessages as $message)
         {
-            $groupedMessages[$message['recipientId']][] = $message;
+            $groupedMessages[$message['recipientId']] = $message;
         }
         return $groupedMessages;
     }

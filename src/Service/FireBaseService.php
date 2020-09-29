@@ -129,7 +129,7 @@ class FireBaseService
                $messages = $messageRef
                    ->reference()
                    ->collection('messages')
-                   ->where('emailSent', '=', 'false')
+                   ->where('emailSent', '=', false)
                    ->where('seen', '=', 'Delivered')
                    ->where('sentAt', '<', $newTime)
                    ->documents()
@@ -137,7 +137,7 @@ class FireBaseService
 
                foreach ($messages as $message) {
                    $unreadMessagesArr[] = $message->data();
-                   $message->reference()->update([['path' => 'emailSent', 'value' => 'true']]);
+                   $message->reference()->update([['path' => 'emailSent', 'value' => true]]);
                }
            }
        }

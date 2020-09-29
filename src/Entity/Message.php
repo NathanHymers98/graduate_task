@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
@@ -44,7 +45,7 @@ class Message
     private $seen;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", length=255)
      */
     private $emailSent;
 
@@ -53,7 +54,7 @@ class Message
         date_default_timezone_set('Europe/London');
         $timeobj = new \DateTime();
         $time = $timeobj->format('D H:i');
-        $this->setEmailSent('false');
+        $this->setEmailSent(false);
         $this->sentAt = $time;
         $this->seen = 'Delivered';
     }
@@ -135,12 +136,12 @@ class Message
         return $this;
     }
 
-    public function getEmailSent(): ?string
+    public function getEmailSent(): ?bool
     {
         return $this->emailSent;
     }
 
-    public function setEmailSent(string $emailSent): self
+    public function setEmailSent(bool $emailSent): self
     {
         $this->emailSent = $emailSent;
 

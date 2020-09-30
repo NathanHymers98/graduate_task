@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -87,7 +88,7 @@ class User implements UserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
 
-        if($this->email == "admin@project.com"){
+        if ('admin@project.com' == $this->email) {
             $roles[] = 'ROLE_ADMIN';
         }
 
@@ -163,6 +164,4 @@ class User implements UserInterface
             }
         }
     }
-
-
 }

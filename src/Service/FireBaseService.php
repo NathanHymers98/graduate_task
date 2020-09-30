@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Entity\Message;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Kreait\Firebase\Firestore;
-use App\Entity\Message;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -18,7 +19,6 @@ class FireBaseService
 
     private $entityManager;
 
-
     public function __construct(Firestore $firestore, NormalizerInterface $normalizer, EntityManagerInterface $entityManager)
     {
         $this->firestore = $firestore;
@@ -26,13 +26,10 @@ class FireBaseService
         $this->entityManager = $entityManager;
     }
 
-    public function getChatRoomId(UserInterface $sender,  User $recipient)
+    public function getChatRoomId(UserInterface $sender, User $recipient)
     {
-        if($sender->getId() < $recipient->getId()) {
-            $chatRoom = 'chat_room'. $sender->getId() . '_' . $recipient->getId();
-        } else {
-            $chatRoom = 'chat_room'. $recipient->getId() . '_' . $sender->getId();
-        }
+        $chatRoom = ($sender->getId() < $recipient->getId() ? 'chat_room'.$sender->getId().'_'.$recipient->getId() : 'chat_room'.$recipient->getId().'_'.$sender->getId());
+
         return $chatRoom;
     }
 
@@ -56,7 +53,6 @@ class FireBaseService
             ->set($normalMsg);
     }
 
-
     public function updateSeen($chatRoom, UserInterface $sender)
     {
         // Querying FB for any messages documents that meet the two query requirements.
@@ -71,9 +67,8 @@ class FireBaseService
         foreach ($documents as $document) {
             if ($document->exists()) {
                 $document->reference()->update([['path' => 'seen', 'value' => 'Read']]);
-           }
+            }
         }
-
     }
 
     public function getMessages($chatRoom)
@@ -87,7 +82,7 @@ class FireBaseService
                 $message = $document->data();
                 $messages[] = $this->normalizer->denormalize($message, Message::class);
             } else {
-                printf('Document %s does not exist!' . PHP_EOL);
+                printf('Document %s does not exist!'.PHP_EOL);
             }
         }
 
@@ -99,34 +94,35 @@ class FireBaseService
                 'username' => 'System',
                 'content' => 'You have not started a chatroom with this user! Send this user a message',
                 'senderId' => new User(),
-                'sentAt' => new \DateTime,
+                'sentAt' => new \DateTime(),
                 'seen' => 'N/A',
             ];
         }
+
         return $messages;
     }
 
     public function getUnreadMessages()
     {
-       $messagesRef = $this->firestore->database()->collection('chatroom')->documents();
+        $messagesRef = $this->firestore->database()->collection('chatroom')->documents();
 
-       date_default_timezone_set('Europe/London');
+        date_default_timezone_set('Europe/London');
 
-       // Creating two datetime objects, one with the current time and another which behind by 15 minutes
-       $currentTime = new \DateTime();
-       $timeIn15Minutes = new \DateTime();
-       $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT15M'));
-       $newTime = $timeIn15Minutes->format('D H:i');
+        // Creating two datetime objects, one with the current time and another which behind by 15 minutes
+        $currentTime = new \DateTime();
+        $timeIn15Minutes = new \DateTime();
+        $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT15M'));
+        $newTime = $timeIn15Minutes->format('D H:i');
 
-       $timeDifference = $timeIn15Minutes->diff($currentTime);
+        $timeDifference = $timeIn15Minutes->diff($currentTime);
 
         // Looping over all the messages in FB and querying for messages that have been delivered and checking to see if the sentAt field is greater than
         // the time object created above. Any messages the query finds is then looped over to get the specific data of those messages and adds them to an array
         // where they are then denormalized into Message objects
-       $unreadMessagesArr = [];
-       foreach ($messagesRef as $messageRef) {
-           if ($messageRef->exists()) {
-               $messages = $messageRef
+        $unreadMessagesArr = [];
+        foreach ($messagesRef as $messageRef) {
+            if ($messageRef->exists()) {
+                $messages = $messageRef
                    ->reference()
                    ->collection('messages')
                    ->where('emailSent', '=', false)
@@ -135,13 +131,14 @@ class FireBaseService
                    ->documents()
                    ->rows();
 
-               foreach ($messages as $message) {
-                   $unreadMessagesArr[] = $message->data();
-                   $message->reference()->update([['path' => 'emailSent', 'value' => true]]);
-               }
-           }
-       }
-       return $unreadMessagesArr;
+                foreach ($messages as $message) {
+                    $unreadMessagesArr[] = $message->data();
+                    $message->reference()->update([['path' => 'emailSent', 'value' => true]]);
+                }
+            }
+        }
+
+        return $unreadMessagesArr;
     }
 
     public function updateUnreadMessages($chatRoom, UserInterface $currentUser)
@@ -149,9 +146,9 @@ class FireBaseService
         $userMessages = $this->getMessages($chatRoom);
         $msg = new Message();
 
-        foreach($userMessages as $item) {
-            if($item instanceof $msg) {
-                if($currentUser === $item->getRecipientId()) {
+        foreach ($userMessages as $item) {
+            if ($item instanceof $msg) {
+                if ($currentUser === $item->getRecipientId()) {
                     $currentUser->removeReadMessages($item->getSenderId()->getId());
 
                     $this->entityManager->persist($item->getSenderId());

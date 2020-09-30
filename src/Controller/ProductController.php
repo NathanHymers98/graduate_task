@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
-
 
 use App\Form\UploadProductFormType;
 use App\Message\QueueUploadedFile;
@@ -32,7 +32,6 @@ class ProductController extends AbstractController
      */
     public function upload(Request $request, MessageBusInterface $messageBus)
     {
-
         $form = $this->createForm(UploadProductFormType::class);
         $form->handleRequest($request);
 
@@ -51,7 +50,6 @@ class ProductController extends AbstractController
         return $this->render('product/upload.html.twig', [
             'productForm' => $form->createView(),
         ]);
-
     }
 
     /**
@@ -71,8 +69,7 @@ class ProductController extends AbstractController
             'products' => $products,
             'failedProducts' => $failedProducts,
             'failedCount' => $failedCount,
-            'successfulCount' => $successfulCount
-
+            'successfulCount' => $successfulCount,
         ]);
     }
 
@@ -80,7 +77,8 @@ class ProductController extends AbstractController
      * @Route("/resetdatabase", name="app_cleardb")
      * @IsGranted("ROLE_USER")
      */
-    public function resetDatabase(EntityManagerInterface $entityManager, ProductRepository $productRepository, UserRepository $userRepository){ // Allows me to easily reset the database for testing purposes
+    public function resetDatabase(EntityManagerInterface $entityManager, ProductRepository $productRepository, UserRepository $userRepository)
+    { // Allows me to easily reset the database for testing purposes
         $prodEntities = $productRepository->findAll();
         $userEntities = $userRepository->findAll();
 

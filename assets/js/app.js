@@ -28,16 +28,41 @@ $(document).ready(function(){
 });
 
 
-// import * as firebase from 'firebase/app';
-// import 'firebase/firestore';
-//
-// firebase.initializeApp({
-//     apiKey: "AIzaSyDStPeaO_aqYK8Stc-XX-KtUk4vuPPWHvs",
-//     authDomain: "graduatetask.firebaseapp.com",
-//     projectId: "graduatetask"
-// });
-//
-// const db = firebase.firestore();
+import * as firebase from 'firebase/app';
+import 'firebase/messaging';
+import 'firebase/firestore';
+
+firebase.initializeApp({
+    apiKey: "AIzaSyDStPeaO_aqYK8Stc-XX-KtUk4vuPPWHvs",
+    authDomain: "graduatetask.firebaseapp.com",
+    projectId: "graduatetask",
+    databaseURL: "https://graduatetask.firebaseio.com",
+    messagingSenderId: "370767289258",
+    appId: "1:370767289258:web:88e162f1c214b6123f69d3"
+});
+
+const db = firebase.firestore();
+const messaging = firebase.messaging();
+messaging.usePublicVapidKey("BP_Z9fw3y6-SxTSiwDVBT6Q7s0mkoz9UEmC9XtSl2jCtBpZEEht0jghk7giyqQ68JMemOvoap0VehiyC1yo2KMA");
+messaging.requestPermission()
+    .then(function () {
+        console.log('Have perms');
+        return messaging.getToken();
+    })
+    .then(function (token) {
+        db.collection('Device').doc().set({
+            token: token
+        })
+    })
+    .catch(function (err) {
+        console.log('Error occured');
+    });
+
+messaging.onMessage(function (payload) {
+    console.log('onMessage: ', payload)
+});
+
+
 
 // (function () {
 //     function addData() {

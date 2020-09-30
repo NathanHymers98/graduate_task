@@ -75,9 +75,12 @@ class UserHasUnreadMessageSendCommand extends Command
            if (!empty($groupedMessages)) {
                $email = (new TemplatedEmail())
                    ->from(new Address('gradtask@wren.com', 'gradtask'))
-                   ->to($recipient->getEmail())
+                   ->to(new Address($recipient->getEmail()))
                    ->subject('You have unread messages!')
-                   ->htmlTemplate('email/unread_messages_email.html.twig');
+                   ->htmlTemplate('email/unread_messages_email.html.twig')
+                   ->context([
+                       'messages' => $groupedMessages,
+                   ]);
 
                $this->mailer->send($email);
                $io->progressAdvance();

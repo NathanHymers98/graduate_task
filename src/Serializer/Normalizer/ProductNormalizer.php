@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Serializer\Normalizer;
-
 
 use App\Entity\Product;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
@@ -17,7 +17,6 @@ class ProductNormalizer implements DenormalizerInterface, CacheableSupportsMetho
     {
         $this->normalizer = $normalizer;
     }
-
 
     public function hasCacheableSupportsMethod(): bool
     {
@@ -37,12 +36,12 @@ class ProductNormalizer implements DenormalizerInterface, CacheableSupportsMetho
         }
 
         $product = new Product(); // Creating new Product objects with the data that was passed from the serializer
-            $product->setProductCode($data['Product Code']);
-            $product->setProductName($data['Product Name']);
-            $product->setProductDescription($data['Product Description']);
-            $product->setProductStock($data['Stock']);
-            $product->setNetCost($data['Cost in GBP']);
-            $product->setIsDiscontinued($data['Discontinued']);
+        $product->setProductCode($data['Product Code']);
+        $product->setProductName($data['Product Name']);
+        $product->setProductDescription($data['Product Description']);
+        $product->setProductStock($data['Stock']);
+        $product->setNetCost($data['Cost in GBP']);
+        $product->setIsDiscontinued($data['Discontinued']);
 
         return $product;
     }

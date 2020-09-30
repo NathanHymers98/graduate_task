@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Form;
@@ -20,10 +21,10 @@ class UploadProductFormType extends AbstractType
                 'constraints' => [
                     new File([
                         'mimeTypes' => 'text/plain',
-                        'mimeTypesMessage' => 'Please upload a valid CSV file'
-                    ])
+                        'mimeTypesMessage' => 'Please upload a valid CSV file',
+                    ]),
                 ],
-                'mapped' => false
+                'mapped' => false,
             ])
         ;
     }

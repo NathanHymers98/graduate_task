@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +14,6 @@ class UserService
 
     public function __construct(UserRepository $userRepository)
     {
-
         $this->userRepository = $userRepository;
     }
 

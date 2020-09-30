@@ -1,22 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Serializer\Normalizer;
 
 use App\Entity\Message;
 use App\Entity\User;
-use Symfony\Component\Serializer\Exception\BadMethodCallException;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Exception\ExtraAttributesException;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
-use Symfony\Component\Serializer\Exception\LogicException;
-use Symfony\Component\Serializer\Exception\RuntimeException;
-use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Doctrine\ORM\EntityManagerInterface;
 
 class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, CacheableSupportsMethodInterface
 {
@@ -29,10 +23,9 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
         $this->entityManager = $entityManager;
     }
 
-    public function normalize($object, $format = null, array $context = array()): array
+    public function normalize($object, $format = null, array $context = []): array
     {
         $data = $this->normalizer->normalize($object, $format, $context);
-
 
         return $data;
     }
@@ -48,7 +41,7 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
@@ -64,8 +57,8 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
         // if the recipient and sender are different objects and the messages seen property is set to delivered
         // Check to make sure that the sender is not in the recipients hasUnreadMessagesFrom array property
         // If the sender is not in there already, then add them to that array.
-        if($recipient !== $sender && $message->getSeen() == 'Delivered') {
-            if(!in_array($sender->getId(), $recipient->getHasUnreadMessagesFrom())) {
+        if ($recipient !== $sender && 'Delivered' == $message->getSeen()) {
+            if (!in_array($sender->getId(), $recipient->getHasUnreadMessagesFrom())) {
                 $recipient->setHasUnreadMessagesFrom($sender->getId());
             }
         }
@@ -76,7 +69,7 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function supportsDenormalization($data, string $type, string $format = null)
     {

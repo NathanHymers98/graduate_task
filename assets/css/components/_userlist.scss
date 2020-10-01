@@ -1,0 +1,26 @@
+.user-table {
+  width: 80%;
+  margin-left: $auto;
+  margin-right: $auto;
+}
+
+table.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #1d2124;
+}
+
+button.btn.message-btn {
+  color: white;
+}
+
+.unread-msg-alert {
+  background: $webkit-linear-gradient;
+  background: $linear-gradient;
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.47);
+}
+
+tr {
+  vertical-align: middle;
+  text-align: center;
+}

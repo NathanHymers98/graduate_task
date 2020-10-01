@@ -107,14 +107,9 @@ class FireBaseService
         $messagesRef = $this->firestore->database()->collection('chatroom')->documents();
 
         date_default_timezone_set('Europe/London');
-
-        // Creating two datetime objects, one with the current time and another which behind by 15 minutes
-        $currentTime = new \DateTime();
         $timeIn15Minutes = new \DateTime();
         $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT15M'));
-        $newTime = $timeIn15Minutes->format('D H:i');
-
-        $timeDifference = $timeIn15Minutes->diff($currentTime);
+        $timeIn15Minutes = strtotime($timeIn15Minutes->format('D H:i'));
 
         // Looping over all the messages in FB and querying for messages that have been delivered and checking to see if the sentAt field is greater than
         // the time object created above. Any messages the query finds is then looped over to get the specific data of those messages and adds them to an array
@@ -127,7 +122,7 @@ class FireBaseService
                    ->collection('messages')
                    ->where('emailSent', '=', false)
                    ->where('seen', '=', 'Delivered')
-                   ->where('sentAt', '<', $newTime)
+                   ->where('sentAt', '<', $timeIn15Minutes)
                    ->documents()
                    ->rows();
 

@@ -49,6 +49,9 @@ class MessageNormalizer implements DenormalizerInterface, NormalizerInterface, C
         $sender = $this->entityManager->getRepository(User::class)->find(['id' => $data['senderId']]);
         $recipient = $this->entityManager->getRepository(User::class)->find(['id' => $data['recipientId']]);
 
+
+        $data['sentAt'] = (new \DateTime())->setTimestamp($data['sentAt'])->format(\DateTime::ATOM);
+
         $message = $this->normalizer->denormalize($data, $type, $format, $context);
 
         $message->setSenderId($sender);

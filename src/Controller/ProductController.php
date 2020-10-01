@@ -65,7 +65,7 @@ class ProductController extends AbstractController
         $successfulCount = count($products);
         $failedCount = count($failedProducts);
 
-        return $this->render('product/list.html.twig', [
+        return $this->render('product/productlist.html.twig', [
             'products' => $products,
             'failedProducts' => $failedProducts,
             'failedCount' => $failedCount,

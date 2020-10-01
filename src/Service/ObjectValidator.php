@@ -9,10 +9,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ObjectValidator // This class validates the objects that are taken from the file upload.
 {
-    const  COST_TO_LOW = 'Cost is less than 5.';
-    const  COST_TO_HIGH = 'Cost is over £1000';
-    const  STOCK_TO_LOW = 'Stock is less than 10.';
-
     public function standardCheck(ValidatorInterface $validator, Product $product)
     {
         $errors = $validator->validate($product);

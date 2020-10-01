@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity;
 
 use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
@@ -55,7 +55,7 @@ class Message
         $timeobj = new \DateTime();
         $time = $timeobj->format('D H:i');
         $this->setEmailSent(false);
-        $this->sentAt = $time;
+        $this->sentAt = strtotime($time);
         $this->seen = 'Delivered';
     }
 
@@ -74,7 +74,6 @@ class Message
     {
         $this->chatRoomId = $chatRoomId;
     }
-
 
     public function getContent(): ?string
     {

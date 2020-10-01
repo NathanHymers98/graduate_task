@@ -1,8 +1,11 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.30.0",
+        "@symfony/webpack-encore": "^0.31.0",
         "core-js": "^3.0.0",
+        "less-loader": "^6.2.0",
+        "node-sass": "^4.14.1",
         "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^9.0.1",
         "webpack-node-externals": "^2.5.2",
         "webpack-notifier": "^1.6.0"
     },
@@ -18,10 +21,11 @@
         "@firebase/app": "^0.6.11",
         "@fortawesome/fontawesome-free": "^5.14.0",
         "@types/node": "^14.10.1",
-        "firebase": "^7.20.0",
-        "firebase-admin": "^9.1.1",
+        "firebase": "^7.21.1",
+        "firebase-admin": "^9.2.0",
         "googleauth": "^3.0.2",
         "jquery": "^3.5.1",
+        "less": "^3.12.2",
         "net": "^1.0.2",
         "tls": "0.0.1"
     }

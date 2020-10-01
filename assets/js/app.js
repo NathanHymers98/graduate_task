@@ -5,8 +5,8 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-// any CSS you import will output into a single css file (app.css in this case)
-import '../css/app.css';
+// any CSS you import will output into a single css file (app.scss in this case)
+import '../css/app.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
@@ -27,19 +27,20 @@ $(document).ready(function(){
     }, 10000);
 });
 
-
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 import 'firebase/firestore';
 
-firebase.initializeApp({
+var config = {
     apiKey: "AIzaSyDStPeaO_aqYK8Stc-XX-KtUk4vuPPWHvs",
     authDomain: "graduatetask.firebaseapp.com",
     projectId: "graduatetask",
     databaseURL: "https://graduatetask.firebaseio.com",
     messagingSenderId: "370767289258",
     appId: "1:370767289258:web:88e162f1c214b6123f69d3"
-});
+};
+
+firebase.initializeApp(config);
 
 const db = firebase.firestore();
 const messaging = firebase.messaging();
@@ -50,56 +51,24 @@ messaging.requestPermission()
         return messaging.getToken();
     })
     .then(function (token) {
-        db.collection('Device').doc().set({
-            token: token
-        })
+        saveToken(token)
     })
     .catch(function (err) {
         console.log('Error occured');
     });
 
+function saveToken(token) {
+    db.collection('device').doc('token').set({
+        token: token
+    })
+        .then(function () {
+            console.log('Token has been saved')
+        });
+}
+
 messaging.onMessage(function (payload) {
-    console.log('onMessage: ', payload)
+    console.log('onMessage: ', payload);
 });
-
-
-
-// (function () {
-//     function addData() {
-//         db.collection("cities").doc("LA").set({
-//             name: "Los Angeles",
-//             state: "CA",
-//             country: "USA"
-//         })
-//             .then(function() {
-//                 console.log("Document successfully written!");
-//             })
-//             .catch(function(error) {
-//                 console.error("Error writing document: ", error);
-//             });
-//     }
-//     document.getElementById('submit_form').addEventListener('click', addData, true);
-// })();
-
-
-
-// var docRef = db.collection("Users").doc("23");
-//
-// (function () {
-//     function getData() {
-//         docRef.get().then(function(doc) {
-//             if (doc.exists) {
-//                 console.log("Document data:", doc.data());
-//             } else {
-//                 // doc.data() will be undefined in this case
-//                 console.log("No such document!");
-//             }
-//         }).catch(function(error) {
-//             console.log("Error getting document:", error);
-//         });
-//     }
-//     document.getElementById('submit_form').addEventListener('click', getData, true);
-// })();
 
 
 

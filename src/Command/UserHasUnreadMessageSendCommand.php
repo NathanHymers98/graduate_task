@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command;
@@ -10,9 +11,7 @@ use App\Service\FireBaseService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Mailer\MailerInterface;
@@ -22,7 +21,6 @@ use Symfony\Component\Routing\RouterInterface;
 class UserHasUnreadMessageSendCommand extends Command
 {
     protected static $defaultName = 'app:user-has-unread-message:send';
-
 
     private $userRepository;
     /**
@@ -52,7 +50,6 @@ class UserHasUnreadMessageSendCommand extends Command
         $this->entityManager = $entityManager;
     }
 
-
     protected function configure()
     {
         $this
@@ -71,9 +68,8 @@ class UserHasUnreadMessageSendCommand extends Command
         foreach ($groupedMessages as $groupedMessage) {
             $recipient = $this->entityManager->getRepository(User::class)->find(['id' => $groupedMessage['recipientId']]);
 
-
-           if (!empty($groupedMessages)) {
-               $email = (new TemplatedEmail())
+            if (!empty($groupedMessages)) {
+                $email = (new TemplatedEmail())
                    ->from(new Address('gradtask@wren.com', 'gradtask'))
                    ->to(new Address($recipient->getEmail()))
                    ->subject('You have unread messages!')
@@ -82,10 +78,9 @@ class UserHasUnreadMessageSendCommand extends Command
                        'messages' => $groupedMessages,
                    ]);
 
-               $this->mailer->send($email);
-               $io->progressAdvance();
-           }
-
+                $this->mailer->send($email);
+                $io->progressAdvance();
+            }
         }
         $io->progressFinish();
         $io->success('Emails were sent to users');
@@ -95,10 +90,10 @@ class UserHasUnreadMessageSendCommand extends Command
 
     public function groupUnreadMessages($unreadMessages)
     {
-        foreach($unreadMessages as $message)
-        {
+        foreach ($unreadMessages as $message) {
             $groupedMessages[$message['recipientId']] = $message;
         }
+
         return $groupedMessages;
     }
 }

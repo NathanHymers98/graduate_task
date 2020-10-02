@@ -12,14 +12,14 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// if ('serviceWorker' in navigator) {
-//     navigator.serviceWorker.register('../firebase-messaging-sw.js')
-//         .then(function(registration) {
-//             console.log('Registration successful, scope is:', registration.scope);
-//         }).catch(function(err) {
-//         console.log('Service worker registration failed, error:', err);
-//     });
-// }
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('../firebase-messaging-sw.js')
+        .then(function(registration) {
+            console.log('Registration successful, scope is:', registration.scope);
+        }).catch(function(err) {
+        console.log('Service worker registration failed, error:', err);
+    });
+}
 
 messaging.setBackgroundMessageHandler(function (payload) {
     const title = 'New message';
@@ -38,5 +38,5 @@ messaging.setBackgroundMessageHandler(function (payload) {
 //         "body": "5 to 1",
 //         "icon": "firebase-logo.png"
 // },
-// "to": "c_KiRuQ_u1-mQfY2HscSPI:APA91bF5mZG_jfiPXWeXZ5uZD0XZ_mfJH_KDd75d_lSR-qfuzxTcyP7Zq8fah8-BDOlzn7sDXrSdsrdmuDa6guU7LfwoXaT2K43Q2vva5S6EzbIrO9D3Qabb-qH0CKrhkNVgA6yNrue1"
+// "to": "d-Wih4TzAp2Tado-CRjUiu:APA91bF6PfB4_xcm7dc6Z69IXwcubtneYMg_0gvl9sI5N9Nqhdo6hbm0egSvgzHtV1rKT_hSrHLWkmeSGjkyMTeKvmTTmKXUtaIyG5cvVeimkPQhkOkOHnWuoWNG8xUXY6sgsqa7Mzop"
 // }' "https://fcm.googleapis.com/fcm/send"

@@ -10,9 +10,11 @@ button.btn.btn-success {
 .form-signin {
   width: 100%;
   max-width: 330px;
-  padding: 15px;
+  padding: 25px;
   margin: $auto;
-  margin-top: 50px;
+  margin-top: 70px;
+  border-radius: 15px;
+  background-color: rgba(0,0,0,0.4);
 }
 
 .form-signin .checkbox {
@@ -35,15 +37,17 @@ button.btn.btn-success {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+  background-color: white;
+  color: white;
 }
 
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  background-color: white;
+  color: white;
 }
-
-/* LOGIN REGISTRATION */
 
 .form-container {
   border-left: $form-container-border;
@@ -60,4 +64,9 @@ button.btn.btn-success {
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
   color: blue;
+}
+
+.registration-link {
+  float: $auto;
+  color: black;
 }

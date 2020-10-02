@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\ElasticSearch\ElasticSearchUsers;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Form\ChatRoomFormType;
@@ -20,7 +21,7 @@ class ChatRoomController extends AbstractController
      * @Route("/chat_room/{recipient}", name="app_chat_room")
      * @Entity("user", expr="repository.findOneBy(recipient)")
      */
-    public function chatRoom(User $recipient, Request $request, FireBaseService $fireBaseService, UserService $userService)
+    public function chatRoom(User $recipient, Request $request, FireBaseService $fireBaseService, UserService $userService, ElasticSearchUsers $elasticSearchUsers)
     {
         // Setting variables that will be used for the senderId and recipientId respectively.
         $currentUser = $this->getUser();

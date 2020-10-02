@@ -8,6 +8,7 @@
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
+        "elasticsearch/elasticsearch": "v6.0.1",
         "friendsofphp/php-cs-fixer": "^2.16",
         "google/cloud-firestore": "^1.14",
         "grpc/grpc": "^1.30",

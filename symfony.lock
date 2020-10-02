@@ -120,6 +120,9 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "elasticsearch/elasticsearch": {
+        "version": "v7.9.0"
+    },
     "fig/http-message-util": {
         "version": "1.1.4"
     },
@@ -182,6 +185,12 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
+    },
+    "guzzlehttp/ringphp": {
+        "version": "1.1.1"
+    },
+    "guzzlehttp/streams": {
+        "version": "3.0.0"
     },
     "kreait/clock": {
         "version": "1.0.1"
@@ -313,6 +322,9 @@
     },
     "ramsey/uuid": {
         "version": "3.9.3"
+    },
+    "react/promise": {
+        "version": "v2.8.0"
     },
     "riverline/multipart-parser": {
         "version": "2.0.8"

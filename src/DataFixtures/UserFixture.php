@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\ElasticSearch\ElasticSearchUsers;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -11,9 +12,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixture extends Fixture
 {
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    /**
+     * @var ElasticSearchUsers
+     */
+    private $elasticSearchUsers;
+
+    public function __construct(UserPasswordEncoderInterface $encoder, ElasticSearchUsers $elasticSearchUsers)
     {
         $this->encoder = $encoder;
+        $this->elasticSearchUsers = $elasticSearchUsers;
     }
 
     // Used to automatically create 10 random users and one admin user
@@ -26,6 +33,9 @@ class UserFixture extends Fixture
             $user->setPassword($password);
             $user->setEmail('user'.$i.'@email.com');
             $manager->persist($user);
+            $manager->flush();
+
+            $this->elasticSearchUsers->addToElastic($user);
         }
 
         $adminUser = new User();
@@ -34,7 +44,8 @@ class UserFixture extends Fixture
         $adminUser->setPassword($password);
         $adminUser->setEmail('admin@project.com');
         $manager->persist($adminUser);
-
         $manager->flush();
+
+        $this->elasticSearchUsers->addToElastic($adminUser);
     }
 }

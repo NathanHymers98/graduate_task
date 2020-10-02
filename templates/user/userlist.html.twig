@@ -10,19 +10,26 @@
         <div class="row">
             <div class="sol-sm-12 user-table">
                 <h1>Search for a user</h1>
-                <form action="">
-                    <div class="input-group mb-3 mt-3">
-                        <input type="text"
-                               name="q"
-                               class="fa fa-search form-control"
-                               placeholder="Search for a user...">
-                        <div class="input-group-append">
-                            <button type="submit"
-                                    class="btn btn-secondary">
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                {{ form_start(UserSearchForm) }}
+                {{ form_row(UserSearchForm.search, {
+                    attr: {
+                        placeholder: 'Search for a user...'
+                    }
+                }) }}
+                {{ form_end(UserSearchForm) }}
+{#                <form action="">#}
+{#                    <div class="input-group mb-3 mt-3">#}
+{#                        <input type="search"#}
+{#                               name="q"#}
+{#                               class="fa fa-search form-control"#}
+{#                               placeholder="Search for a user...">#}
+{#                        <div class="input-group-append">#}
+{#                            <button type="submit"#}
+{#                                    class="btn btn-secondary">#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </form>#}
 
                 <h1>List of Users</h1>
                 <table class="table table-bordered">
@@ -39,8 +46,8 @@
                                 {% endif %}
                             {% endfor %}
                         {% if app.user != user %}
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
+                            <td>{{ user.Username }}</td>
+                            <td>{{ user.Email }}</td>
                                 <td> <a class="message-btn-text" href="{{ path('app_chat_room', {'recipient': user.id}) }}"><button class="btn btn-success message-btn">Click here to message this user</button></a></td>
                             {% endif %}
                             </tr>

@@ -1,25 +1,25 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\ElasticSearch\ElasticSearchUsers;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use Kreait\Firebase\Firestore;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Form\FormInterface;
 
 class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, FireStore $firestore): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, ElasticSearchUsers $elasticSearchUsers): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -37,6 +37,7 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            $elasticSearchUsers->addToElastic($user);
 
             $token = new UsernamePasswordToken( // Creating a user token so that we can programatically log them in once they have registered
                 $user,
@@ -51,10 +52,8 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_homepage');
         }
 
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
-
 }

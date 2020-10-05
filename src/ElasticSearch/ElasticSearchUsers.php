@@ -7,9 +7,6 @@ use App\Service\ElasticSearchService;
 
 class ElasticSearchUsers
 {
-    /**
-     * @var ElasticSearchService
-     */
     private $elasticSearch;
 
     public function __construct(ElasticSearchService $elasticSearch)
@@ -43,8 +40,8 @@ class ElasticSearchUsers
             'type' => 'users',
             'body' => [
                 'query' => [
-                    'match' => [
-                        'Username' => $search,
+                    'wildcard' => [
+                        'Username' => "$search*",
                     ],
                 ],
             ],

@@ -26,6 +26,8 @@ form.form-message {
 .msg-type:focus{
   box-shadow: none;
   outline: 0;
+  background-color: $darkgrey;
+  color: white;
 }
 
 .msg-head {

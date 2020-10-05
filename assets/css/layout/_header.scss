@@ -1,11 +1,12 @@
 body {
   position: relative;
-  background: #efefee;
+  background: rgb(255, 251, 253);
   min-height: 45rem;
-  padding-bottom: 80px;
 }
 
-html {height:100%}
+html {
+  height: 100%
+}
 
 .navbar{
   background-color: $wrengreen!important;

@@ -17,6 +17,8 @@ class UserFixture extends Fixture
      */
     private $elasticSearchUsers;
 
+    private $encoder;
+
     public function __construct(UserPasswordEncoderInterface $encoder, ElasticSearchUsers $elasticSearchUsers)
     {
         $this->encoder = $encoder;

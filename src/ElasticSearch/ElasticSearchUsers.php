@@ -62,4 +62,17 @@ class ElasticSearchUsers
 
         return $result;
     }
+
+    public function deleteUsers()
+    {
+        $client = $this->elasticSearch->connection();
+
+        $params = [
+            'index' => 'my_users',
+            'type' => 'users',
+
+        ];
+
+        $client->delete($params);
+    }
 }

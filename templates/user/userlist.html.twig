@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
-
 {% block stylesheets %}
     {{ parent() }}
 {% endblock %}
-
+{% block loggedin %}
+{% endblock %}
 {% block body %}
-
     <div class="container">
         <div class="row">
             <div class="sol-sm-12 user-table">
@@ -17,48 +16,39 @@
                     }
                 }) }}
                 {{ form_end(UserSearchForm) }}
-{#                <form action="">#}
-{#                    <div class="input-group mb-3 mt-3">#}
-{#                        <input type="search"#}
-{#                               name="q"#}
-{#                               class="fa fa-search form-control"#}
-{#                               placeholder="Search for a user...">#}
-{#                        <div class="input-group-append">#}
-{#                            <button type="submit"#}
-{#                                    class="btn btn-secondary">#}
-{#                            </button>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </form>#}
-
                 <h1>List of Users</h1>
-                <table class="table table-bordered">
-                    <tr>
+                <div class="columns columns-right btn-group float-right">
+                    <a href="{{ path('app_userlist') }}">
+                        <button class="btn"> Refresh list
+                            <i class="fa fa-sync"></i>
+                        </button>
+                    </a>
+                </div>
+                <table id="table" class="table table-bordered">
+                    <tr class="column-names">
                         <th>Username</th>
                         <th>Email</th>
                         <th>Message</th>
                     </tr>
                     <tbody>
-                        {% for user in users %}
-                            {% for usermsg in app.user.hasUnreadMessagesFrom  %}
-                                {% if app.user.id != usermsg and user.id == usermsg %}
-                                    <tr class="unread-msg-alert">
-                                {% endif %}
-                            {% endfor %}
+                    {% for user in users %}
+                        {% for usermsg in app.user.hasUnreadMessagesFrom %}
+                            {% if app.user.id != usermsg and user.id == usermsg %}
+                                <tr class="unread-msg-alert">
+                            {% endif %}
+                        {% endfor %}
                         {% if app.user != user %}
                             <td>{{ user.Username }}</td>
                             <td>{{ user.Email }}</td>
-                                <td> <a class="message-btn-text" href="{{ path('app_chat_room', {'recipient': user.id}) }}"><button class="btn btn-success message-btn">Click here to message this user</button></a></td>
-                            {% endif %}
-                            </tr>
+                            <td><a class="message-btn-text" href="{{ path('app_chat_room', {'recipient': user.id}) }}">
+                                    <button class="btn btn-success message-btn">Click here to message this user</button>
+                                </a></td>
+                        {% endif %}
+                        </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
 {% endblock %}
-
-{% block loggedin %}{% endblock %}

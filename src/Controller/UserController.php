@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\ElasticSearch\ElasticSearchUsers;
 use App\Form\UserSearchType;
-use App\Repository\UserRepository;
 use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,5 +39,15 @@ class UserController extends AbstractController
             'UserSearchForm' => $form->createView(),
             'users' => $users,
         ]);
+    }
+
+    /**
+     * @Route("/delete_users_elastic", name="app_delete_from_elastic")
+     */
+    public function deleteFromElastic(ElasticSearchUsers $elasticSearchUsers)
+    {
+        $elasticSearchUsers->deleteUsers();
+
+        return $this->render('user/userlist.html.twig');
     }
 }

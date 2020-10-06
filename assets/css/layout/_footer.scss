@@ -1,6 +1,5 @@
 .wrapper {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  padding-bottom: 2.5rem;
 }
 
 .site-footer
@@ -10,11 +9,10 @@
   font-size:15px;
   line-height:24px;
   color:#737373;
-  position: fixed;
+  position: relative;
   width: 100%;
   bottom: 0;
-  left: 0;
-  height: 8%;
+  height: 10rem;
 }
 
 .site-footer .social-icons

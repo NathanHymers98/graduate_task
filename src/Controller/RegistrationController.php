@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\ElasticSearch\ElasticSearchUsers;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Service\ElasticSearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +18,12 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param ElasticSearchService $elasticSearch
+     * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, ElasticSearchUsers $elasticSearchUsers): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, ElasticSearchService $elasticSearch): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -37,7 +41,7 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            $elasticSearchUsers->addToElastic($user);
+            $elasticSearch->addToElastic($user);
 
             $token = new UsernamePasswordToken( // Creating a user token so that we can programatically log them in once they have registered
                 $user,

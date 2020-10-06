@@ -12,7 +12,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,6 +31,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/upload", name="app_upload")
      * @IsGranted("ROLE_USER")
+     *
+     * @param Request $request
+     * @param MessageBusInterface $messageBus
+     * @return RedirectResponse|Response
      */
     public function upload(Request $request, MessageBusInterface $messageBus)
     {
@@ -55,6 +61,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/list", name="app_list")
      * @IsGranted("ROLE_USER")
+     *
+     * @param ProductRepository $productRepository
+     * @param Request $request
+     * @return Response
      */
     public function listAction(ProductRepository $productRepository, Request $request) // Shows two tables, one with successful products and another with failed products
     {
@@ -76,6 +86,11 @@ class ProductController extends AbstractController
     /**
      * @Route("/resetdatabase", name="app_cleardb")
      * @IsGranted("ROLE_USER")
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param ProductRepository $productRepository
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function resetDatabase(EntityManagerInterface $entityManager, ProductRepository $productRepository, UserRepository $userRepository)
     { // Allows me to easily reset the database for testing purposes

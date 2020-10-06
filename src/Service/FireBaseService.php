@@ -9,16 +9,35 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Kreait\Firebase\Firestore;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+/**
+ * Class FireBaseService.
+ */
 class FireBaseService
 {
+    /**
+     * @var Firestore
+     */
     private $firestore;
 
+    /**
+     * @var NormalizerInterface
+     */
     private $normalizer;
 
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * FireBaseService constructor.
+     * @param Firestore $firestore
+     * @param NormalizerInterface $normalizer
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(Firestore $firestore, NormalizerInterface $normalizer, EntityManagerInterface $entityManager)
     {
         $this->firestore = $firestore;
@@ -26,6 +45,11 @@ class FireBaseService
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param UserInterface $sender
+     * @param User $recipient
+     * @return string
+     */
     public function getChatRoomId(UserInterface $sender, User $recipient)
     {
         $chatRoom = ($sender->getId() < $recipient->getId() ? 'chat_room'.$sender->getId().'_'.$recipient->getId() : 'chat_room'.$recipient->getId().'_'.$sender->getId());
@@ -33,6 +57,14 @@ class FireBaseService
         return $chatRoom;
     }
 
+    /**
+     * @param $message
+     * @param $chatRoom
+     *
+     * @param UserInterface $sender
+     * @param User $recipient
+     * @throws ExceptionInterface
+     */
     public function storeMessage($message, $chatRoom, UserInterface $sender, User $recipient)
     {
         $msg = new Message();
@@ -53,6 +85,10 @@ class FireBaseService
             ->set($normalMsg);
     }
 
+    /**
+     * @param $chatRoom
+     * @param UserInterface $sender
+     */
     public function updateSeen($chatRoom, UserInterface $sender)
     {
         // Querying FB for any messages documents that meet the two query requirements.
@@ -71,6 +107,13 @@ class FireBaseService
         }
     }
 
+    /**
+     * @param $chatRoom
+     *
+     * @return array
+     *
+     * @throws \Exception
+     */
     public function getMessages($chatRoom)
     {
         // Getting all the messages that are stored in FB and ordering them by the date that they were sent at.
@@ -102,6 +145,11 @@ class FireBaseService
         return $messages;
     }
 
+    /**
+     * @return array
+     *
+     * @throws \Exception
+     */
     public function getUnreadMessages()
     {
         $messagesRef = $this->firestore->database()->collection('chatroom')->documents();
@@ -109,7 +157,7 @@ class FireBaseService
         date_default_timezone_set('Europe/London');
         $timeIn15Minutes = new \DateTime();
         $timeIn15Minutes = $timeIn15Minutes->sub(new \DateInterval('PT15M'));
-        $timeIn15Minutes = strtotime($timeIn15Minutes->format('D H:i'));
+        $timeIn15Minutes = strtotime($timeIn15Minutes->format('D H:i:s'));
 
         // Looping over all the messages in FB and querying for messages that have been delivered and checking to see if the sentAt field is greater than
         // the time object created above. Any messages the query finds is then looped over to get the specific data of those messages and adds them to an array
@@ -136,6 +184,12 @@ class FireBaseService
         return $unreadMessagesArr;
     }
 
+    /**
+     * @param $chatRoom
+     *
+     * @param UserInterface $currentUser
+     * @throws \Exception
+     */
     public function updateUnreadMessages($chatRoom, UserInterface $currentUser)
     {
         $userMessages = $this->getMessages($chatRoom);

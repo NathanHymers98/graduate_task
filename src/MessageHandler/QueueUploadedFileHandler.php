@@ -25,6 +25,16 @@ class QueueUploadedFileHandler implements MessageHandlerInterface
     private $uploaderHelper;
     private $validatorInterface;
 
+    /**
+     * QueueUploadedFileHandler constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param SerializerInterface $serializer
+     * @param ObjectValidator $validator
+     * @param NormalizerInterface $normalizer
+     * @param ProductNormalizer $productNormalizer
+     * @param UploaderHelper $uploaderHelper
+     * @param ValidatorInterface $validatorInterface
+     */
     public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, ObjectValidator $validator, NormalizerInterface $normalizer, ProductNormalizer $productNormalizer, UploaderHelper $uploaderHelper, ValidatorInterface $validatorInterface)
     {
         $this->entityManager = $entityManager;
@@ -36,6 +46,9 @@ class QueueUploadedFileHandler implements MessageHandlerInterface
         $this->validatorInterface = $validatorInterface;
     }
 
+    /**
+     * @param QueueUploadedFile $queueUploadedFile
+     */
     public function __invoke(QueueUploadedFile $queueUploadedFile)
     {
         $uploadedFile = $queueUploadedFile->getProduct();

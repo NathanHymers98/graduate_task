@@ -18,6 +18,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * Class UserHasUnreadMessageSendCommand.
+ */
 class UserHasUnreadMessageSendCommand extends Command
 {
     protected static $defaultName = 'app:user-has-unread-message:send';
@@ -40,6 +43,14 @@ class UserHasUnreadMessageSendCommand extends Command
      */
     private $entityManager;
 
+    /**
+     * UserHasUnreadMessageSendCommand constructor.
+     * @param UserRepository $userRepository
+     * @param FireBaseService $fireBaseService
+     * @param MailerInterface $mailer
+     * @param RouterInterface $router
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(UserRepository $userRepository, FireBaseService $fireBaseService, MailerInterface $mailer, RouterInterface $router, EntityManagerInterface $entityManager)
     {
         parent::__construct(null);
@@ -57,6 +68,12 @@ class UserHasUnreadMessageSendCommand extends Command
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -88,6 +105,11 @@ class UserHasUnreadMessageSendCommand extends Command
         return 0;
     }
 
+    /**
+     * @param $unreadMessages
+     *
+     * @return mixed
+     */
     public function groupUnreadMessages($unreadMessages)
     {
         foreach ($unreadMessages as $message) {

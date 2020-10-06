@@ -9,32 +9,36 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-            <form method="post" class="form-signin">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+                <form method="post" class="form-signin">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <div class="form-group">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword">Password</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" required>
-                </div>
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                               class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
 
-    <button class="btn btn-primary btn-block" type="submit">
-        Sign in
-    </button>
-                <a class="registration-link" href="{{ path('app_register') }}">Not an existing user? Register here</a>
-            </form>
+                    <button class="btn btn-primary btn-block" type="submit">
+                        Sign in
+                    </button>
+                    <a class="registration-link" href="{{ path('app_register') }}">Not an existing user? Register
+                        here</a>
+                </form>
 
             </div>
         </div>
     </div>
+    {% block footer %}
+    {% endblock %}
 {% endblock %}

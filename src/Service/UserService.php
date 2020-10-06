@@ -12,11 +12,19 @@ class UserService
      */
     private $userRepository;
 
+    /**
+     * UserService constructor.
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function getAllUsers(Request $request)
     {
         $q = $request->query->get('q');

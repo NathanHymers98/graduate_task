@@ -53,7 +53,7 @@ class Message
     {
         date_default_timezone_set('Europe/London');
         $timeobj = new \DateTime();
-        $time = $timeobj->format('D H:i');
+        $time = $timeobj->format('D H:i:s');
         $this->setEmailSent(false);
         $this->sentAt = strtotime($time);
         $this->seen = 'Delivered';

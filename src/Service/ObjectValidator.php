@@ -9,6 +9,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ObjectValidator // This class validates the objects that are taken from the file upload.
 {
+    /**
+     * @param ValidatorInterface $validator
+     * @param Product $product
+     * @return string
+     */
     public function standardCheck(ValidatorInterface $validator, Product $product)
     {
         $errors = $validator->validate($product);
@@ -27,6 +32,10 @@ class ObjectValidator // This class validates the objects that are taken from th
         return '';
     }
 
+    /**
+     * @param Product $product
+     * @throws \Exception
+     */
     public function validateDiscontinued(Product $product) // If an item is discontinued, attach the current date there instead
     {
         $date = new \DateTime();

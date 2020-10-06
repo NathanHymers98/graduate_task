@@ -10,11 +10,19 @@ class UploaderHelper // This class's only job is to handle the upload of the fil
 {
     private $uploadsPath;
 
+    /**
+     * UploaderHelper constructor.
+     * @param string $uploadsPath
+     */
     public function __construct(string $uploadsPath)
     {
         $this->uploadsPath = $uploadsPath;
     }
 
+    /**
+     * @param UploadedFile $uploadedFile
+     * @return string
+     */
     public function uploadFile(UploadedFile $uploadedFile) // Handles the renaming and moving of a file
     {
         $destination = $this->uploadsPath.'/uploads';

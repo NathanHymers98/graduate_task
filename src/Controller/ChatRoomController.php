@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\ElasticSearch\ElasticSearchUsers;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Form\ChatRoomFormType;
@@ -12,16 +11,27 @@ use App\Service\FireBaseService;
 use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 class ChatRoomController extends AbstractController
 {
     /**
      * @Route("/chat_room/{recipient}", name="app_chat_room")
      * @Entity("user", expr="repository.findOneBy(recipient)")
+     *
+     * @param User $recipient
+     * @param Request $request
+     * @param FireBaseService $fireBaseService
+     * @param UserService $userService
+     * @return RedirectResponse|Response
+     *
+     * @throws ExceptionInterface
      */
-    public function chatRoom(User $recipient, Request $request, FireBaseService $fireBaseService, UserService $userService, ElasticSearchUsers $elasticSearchUsers)
+    public function chatRoom(User $recipient, Request $request, FireBaseService $fireBaseService, UserService $userService)
     {
         // Setting variables that will be used for the senderId and recipientId respectively.
         $currentUser = $this->getUser();

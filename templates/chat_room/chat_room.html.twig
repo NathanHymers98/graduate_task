@@ -13,16 +13,13 @@
                 {% if message.senderId == app.user %}
                     <p class="user-name" align="right">{{ message.senderId.username }}</p>
                     <p class="sent-messages" align="right">{{ message.content }}</p>
+                    <p class="message-status" align="right">
                     {% else %}
                         <p class="user-name" align="left">{{ message.senderId.username }}</p>
                         <p class="received-messages" align="left">{{ message.content }}</p>
+                        <p class="message-status" align="left">
                         {% endif %}
 
-                {% if message.senderId == app.user %}
-                    <p class="message-status" align="right">
-                {% else %}
-                    <p class="message-status" align="left">
-                {% endif %}
                 sent: {{ message.sentAt|date('D H:i') }}
                 status: {{ message.seen }}
                 </p>

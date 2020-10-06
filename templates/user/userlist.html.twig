@@ -41,7 +41,8 @@
                             <td>{{ user.Username }}</td>
                             <td>{{ user.Email }}</td>
                             <td><a class="message-btn-text" href="{{ path('app_chat_room', {'recipient': user.id}) }}">
-                                    <button class="btn btn-success message-btn">Click here to message this user</button>
+                                    <button class="btn btn-success message-btn">Message this user
+                                        <i class="fas fa-comment"></i></button>
                                 </a></td>
                         {% endif %}
                         </tr>

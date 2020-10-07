@@ -34,9 +34,6 @@ class FireBaseService
 
     /**
      * FireBaseService constructor.
-     * @param Firestore $firestore
-     * @param NormalizerInterface $normalizer
-     * @param EntityManagerInterface $entityManager
      */
     public function __construct(Firestore $firestore, NormalizerInterface $normalizer, EntityManagerInterface $entityManager)
     {
@@ -52,9 +49,7 @@ class FireBaseService
      */
     public function getChatRoomId(UserInterface $sender, User $recipient)
     {
-        $chatRoom = ($sender->getId() < $recipient->getId() ? 'chat_room'.$sender->getId().'_'.$recipient->getId() : 'chat_room'.$recipient->getId().'_'.$sender->getId());
-
-        return $chatRoom;
+        return $sender->getId() < $recipient->getId() ? 'chat_room'.$sender->getId().'_'.$recipient->getId() : 'chat_room'.$recipient->getId().'_'.$sender->getId();
     }
 
     /**
@@ -187,7 +182,6 @@ class FireBaseService
     /**
      * @param $chatRoom
      *
-     * @param UserInterface $currentUser
      * @throws \Exception
      */
     public function updateUnreadMessages($chatRoom, UserInterface $currentUser)

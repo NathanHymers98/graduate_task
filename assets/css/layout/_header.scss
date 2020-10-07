@@ -3,13 +3,10 @@ body, html {
   background: rgb(255, 251, 253);
   min-height: 100vh;
   height: 100%;
-  overflow: auto;
+  overflow: $auto;
 }
+
 
 .navbar{
   background-color: $wrengreen!important;
-}
-
-.homepage {
-  background: rgba(255, 251, 253, 0) url('/public/build/images/wren.36fc7d9f.png');
 }

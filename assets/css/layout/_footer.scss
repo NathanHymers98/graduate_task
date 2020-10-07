@@ -1,18 +1,17 @@
 .wrapper {
-  padding-bottom: 2.5rem;
+  padding-bottom: 10rem;
 }
 
 .site-footer
 {
   background-color:#26272b;
+  color:#737373;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
-  color:#737373;
-  position: relative;
-  width: 100%;
+  position: absolute;
   bottom: 0;
-  height: 10rem;
+  width:100%;
 }
 
 .site-footer .social-icons

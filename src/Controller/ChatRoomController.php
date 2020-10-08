@@ -30,24 +30,19 @@ class ChatRoomController extends AbstractController
      * @return RedirectResponse|Response
      *
      * @throws ExceptionInterface
+     * @throws \Exception
      */
     public function chatRoom(User $recipient, Request $request, FireBaseService $fireBaseService, UserService $userService)
     {
-        // Setting variables that will be used for the senderId and recipientId respectively.
         $currentUser = $this->getUser();
         $recipientId = $recipient->getId();
         $msg = new Message();
-
         $form = $this->createForm(ChatRoomFormType::class, $msg);
-
-        // Getting the chatroom name via firebase service
         $chatRoom = $fireBaseService->getChatRoomId($currentUser, $recipient);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->get('message')->getData();
-
-            // Storing the messages, passing the information it needs in order to be able to store the data in FB
             $fireBaseService->storeMessage($message, $chatRoom, $currentUser, $recipient);
 
             return $this->redirectToRoute('app_chat_room', ['recipient' => $recipientId]);

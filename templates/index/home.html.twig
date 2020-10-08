@@ -4,21 +4,21 @@
 {% block loggedin %}
 {% endblock %}
 {% block body %}
-<body class="homepage" style="background-image: {{ absolute_url(asset('build/images/nest.jpeg')) }}">
+<body class="homepage">
     <section class="jumbotron text-center homepage-links">
         <div class="container">
             <h1>Welcome</h1>
             <ul class="hp-nav">
                 <li class="hp-link"><a class="nav-item nav-link active" href="{{ path('app_homepage') }}">Home <span class="sr-only">(current)</span></a></li>
-                <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_upload') }}">Upload a File</a></li>
                 {% if app.user %}
-                <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_list') }}">List of Products</a></li>
-                <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_cleardb') }}">Clear Database</a></li>
-                <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_userlist') }}">List of Usernames</a></li>
-                <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+                    <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_upload') }}">Upload a File</a></li>
+                    <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_list') }}">List of Products</a></li>
+                    <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_cleardb') }}">Clear Database</a></li>
+                    <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_userlist') }}">List of Usernames</a></li>
+                    <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a></li>
                 {% else %}
-                <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a></li>
-                <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_register') }}">Register</a></li>
+                    <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a></li>
+                    <li class="hp-link"><a class="nav-item nav-link" href="{{ path('app_register') }}">Register</a></li>
                 {% endif %}
             </ul>
         </div>

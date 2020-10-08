@@ -34,6 +34,9 @@ class FireBaseService
 
     /**
      * FireBaseService constructor.
+     * @param Firestore $firestore
+     * @param NormalizerInterface $normalizer
+     * @param EntityManagerInterface $entityManager
      */
     public function __construct(Firestore $firestore, NormalizerInterface $normalizer, EntityManagerInterface $entityManager)
     {
@@ -182,22 +185,23 @@ class FireBaseService
     /**
      * @param $chatRoom
      *
+     * @param UserInterface $sender
      * @throws \Exception
      */
-    public function updateUnreadMessages($chatRoom, UserInterface $currentUser)
+    public function updateUnreadMessages($chatRoom, UserInterface $sender)
     {
         $userMessages = $this->getMessages($chatRoom);
         $msg = new Message();
 
         foreach ($userMessages as $item) {
             if ($item instanceof $msg) {
-                if ($currentUser === $item->getRecipientId()) {
-                    $currentUser->removeReadMessages($item->getSenderId()->getId());
+                if ($sender === $item->getRecipientId()) {
+                    $sender->removeReadMessages($item->getSenderId()->getId());
 
                     $this->entityManager->persist($item->getSenderId());
                     $this->entityManager->flush();
 
-                    $this->updateSeen($chatRoom, $currentUser);
+                    $this->updateSeen($chatRoom, $sender);
                 }
             }
         }

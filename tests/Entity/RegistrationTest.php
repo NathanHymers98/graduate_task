@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Tests\Entity;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use http\Client;
-use Monolog\Test\TestCase;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use App\Repository\UserRepository;
 
 class RegistrationTest extends WebTestCase
 {
@@ -18,7 +15,7 @@ class RegistrationTest extends WebTestCase
     /** @var Client */
     private $client;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->client = $this->makeClient();
         $kernel = self::bootKernel();
@@ -36,17 +33,16 @@ class RegistrationTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/register');
         $form = $crawler->selectButton('Register')->form();
-        $form->setValues(["registration_form[username]" => "nobody", "registration_form[email]" => "nobody@email.com", "registration_form[plainPassword]" => "password", "registration_form[agreeTerms]" => 1]);
+        $form->setValues(['registration_form[username]' => 'nobody', 'registration_form[email]' => 'nobody@email.com', 'registration_form[plainPassword]' => 'password', 'registration_form[agreeTerms]' => 1]);
         $this->client->submit($form);
         $this->assertStatusCode(302, $this->client);
     }
 
     public function testNewUserIsInDatabase() // Tests that information entered to the form is added to the database
     {
-
         $crawler = $this->client->request('GET', '/register');
         $form = $crawler->selectButton('Register')->form();
-        $form->setValues(["registration_form[username]" => "testuser1", "registration_form[email]" => "testuser1@test.com", "registration_form[plainPassword]" => "password", "registration_form[agreeTerms]" => 1]);
+        $form->setValues(['registration_form[username]' => 'testuser1', 'registration_form[email]' => 'testuser1@test.com', 'registration_form[plainPassword]' => 'password', 'registration_form[agreeTerms]' => 1]);
         $this->client->submit($form);
 
         $user = $this->manager

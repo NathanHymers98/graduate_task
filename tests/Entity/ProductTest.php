@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Tests\Entity;
-
 
 use App\Entity\Product;
 use Monolog\Test\TestCase;
@@ -27,6 +25,6 @@ class ProductTest extends TestCase
             ->setNetCost(1)
             ->setIsDiscontinued('test');
 
-        $this->assertSame('The product code should be: testcode The product name should be testproduct The product description should be: testdesc The cost should be: 1 The stock should be: 1 The products discontinued value should be: test', $product->getDetails() );
+        $this->assertSame('The product code should be: testcode The product name should be testproduct The product description should be: testdesc The cost should be: 1 The stock should be: 1 The products discontinued value should be: test', $product->getDetails());
     }
 }
